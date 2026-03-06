@@ -263,29 +263,19 @@
 
     /* ── LANGUAGE TOGGLE ── */
     #LANG-TOGGLE {
-      position: fixed;
-      top: 50%;
-      right: 28px;
-      transform: translateY(-50%) translateX(0);
-      z-index: 600;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
       gap: 0;
       background: rgba(13, 13, 26, .95);
       border: 1px solid var(--border-h);
       border-radius: 100px;
       overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, .5)
-    }
-
-    [lang="ar"] #LANG-TOGGLE {
-      right: auto;
-      left: 28px
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .4)
     }
 
     .LT-BTN {
-      padding: 12px 16px;
+      padding: 8px 14px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       font-weight: 700;
@@ -311,9 +301,9 @@
     }
 
     .LT-SEP {
-      height: 1px;
-      background: var(--border);
-      width: 100%
+      width: 1px;
+      height: 20px;
+      background: var(--border)
     }
 
     /* ── SCANLINES + GRAIN ── */
@@ -2584,7 +2574,7 @@
 
     .PAY-METHODS-GRID {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 16px
     }
 
@@ -3141,7 +3131,6 @@
       }
 
       .SDOTS,
-      #LANG-TOGGLE,
       .NAV .NAV-LINKS {
         display: none
       }
@@ -3180,6 +3169,428 @@
         padding: 48px 32px
       }
     }
+
+    /* ── MOBILE ── */
+    @media(max-width:640px) {
+      /* Base layout */
+      section {
+        padding: 72px 20px;
+        min-height: auto
+      }
+
+      .C {
+        padding: 0
+      }
+
+      .DIV {
+        margin: 0 20px
+      }
+
+      /* Nav */
+      .NAV {
+        padding: 14px 20px
+      }
+
+      .NL-NAME {
+        font-size: 22px
+      }
+
+      .NL-TAG {
+        font-size: 8px
+      }
+
+      /* Typography */
+      .DISPLAY {
+        font-size: clamp(38px, 11vw, 60px);
+        letter-spacing: 1px
+      }
+
+      [lang="ar"] .DISPLAY {
+        font-size: clamp(32px, 10vw, 52px)
+      }
+
+      .BODY {
+        font-size: 15px
+      }
+
+      .EYEBROW {
+        font-size: 9px;
+        letter-spacing: 2px
+      }
+
+      /* Buttons */
+      .H-BTNS {
+        flex-direction: column;
+        gap: 12px
+      }
+
+      .BTN-P,
+      .BTN-G {
+        width: 100%;
+        text-align: center;
+        padding: 14px 24px
+      }
+
+      .CL-BTNS {
+        flex-direction: column;
+        gap: 12px
+      }
+
+      /* Hero */
+      .H-WRAP {
+        grid-template-columns: 1fr
+      }
+
+      .H-RIGHT {
+        display: none
+      }
+
+      .H-BODY {
+        font-size: 15px;
+        margin-bottom: 28px
+      }
+
+      .H-STATS {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border-radius: 12px
+      }
+
+      .HS {
+        padding: 16px 12px
+      }
+
+      .HSV {
+        font-size: 32px
+      }
+
+      /* Problem */
+      .PW-GRID {
+        grid-template-columns: 1fr
+      }
+
+      .PW-CELL {
+        padding: 28px 24px
+      }
+
+      .PW-ICON {
+        font-size: 36px;
+        margin-bottom: 16px
+      }
+
+      .PW-TITLE {
+        font-size: 22px
+      }
+
+      /* Features grid */
+      .FT-GRID {
+        grid-template-columns: 1fr;
+        gap: 16px
+      }
+
+      .FC-A,
+      .FC-B,
+      .FC-C,
+      .FC-D,
+      .FC-E,
+      .FC-F,
+      .FC-G {
+        grid-column: span 1
+      }
+
+      .FC {
+        padding: 24px 20px
+      }
+
+      .FC-TITLE {
+        font-size: 22px
+      }
+
+      /* Dashboard */
+      .DB-FRAME {
+        border-radius: 12px;
+        overflow: hidden
+      }
+
+      .DB-TITLEBAR {
+        padding: 10px 14px;
+        flex-wrap: wrap;
+        gap: 6px
+      }
+
+      .DB-TOPROW {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .DB-KPI {
+        padding: 14px
+      }
+
+      .DB-KPI-V {
+        font-size: 22px
+      }
+
+      .ACCESS-G {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      /* Before/After */
+      .BA-ROW {
+        grid-template-columns: 1fr
+      }
+
+      .BA-BEFORE,
+      .BA-AFTER {
+        padding: 24px 20px
+      }
+
+      .BA-MID {
+        display: none
+      }
+
+      .BA-BEFORE {
+        border-right: none;
+        border-bottom: 1px solid var(--border)
+      }
+
+      .BA-TITLE {
+        font-size: 18px
+      }
+
+      /* Roles */
+      .RR-INNER {
+        grid-template-columns: 1fr
+      }
+
+      .RR-LEFT {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 24px 20px
+      }
+
+      .RR-RIGHT {
+        padding: 24px 20px
+      }
+
+      .ACCESS-G {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px
+      }
+
+      .AI {
+        padding: 10px 8px
+      }
+
+      .AI-N {
+        font-size: 10px
+      }
+
+      .AI-D {
+        display: none
+      }
+
+      /* Payment */
+      .PAY-LAYOUT {
+        grid-template-columns: 1fr;
+        gap: 28px
+      }
+
+      .PAY-METHODS-GRID {
+        grid-template-columns: 1fr;
+        gap: 12px
+      }
+
+      .PM-CARD {
+        padding: 20px
+      }
+
+      .PM-ICON {
+        font-size: 28px;
+        margin-bottom: 10px
+      }
+
+      .PM-TITLE {
+        font-size: 18px
+      }
+
+      .PAY-FLOW-BOX {
+        padding: 20px
+      }
+
+      /* Security */
+      .SEC-LAYOUT {
+        grid-template-columns: 1fr;
+        gap: 36px
+      }
+
+      .SEC-FEATS {
+        gap: 12px
+      }
+
+      .SF {
+        padding: 16px
+      }
+
+      /* Closing */
+      .CL-BIGTEXT {
+        margin-bottom: 24px
+      }
+
+      .CL-LINE {
+        font-size: clamp(32px, 9vw, 56px) !important
+      }
+
+      .CL-BENES {
+        gap: 12px
+      }
+
+      /* Footer */
+      .FOOTER {
+        padding: 40px 20px;
+        text-align: center
+      }
+
+      .FT-BRAND {
+        font-size: 38px
+      }
+
+      .FT-DECOR {
+        flex-wrap: wrap;
+        gap: 10px
+      }
+
+      .FT-DECOR-LINE {
+        width: 60px
+      }
+
+      /* Audit log */
+      .AUDIT-BOX {
+        padding: 16px
+      }
+
+      .AL {
+        padding: 10px 0;
+        gap: 10px
+      }
+
+      .AL-T {
+        font-size: 9px
+      }
+
+      /* DB chart */
+      .DB-BOTROW {
+        grid-template-columns: 1fr
+      }
+
+      .DB-CHART-WRAP {
+        height: 120px
+      }
+    }
+    /* ── MOBILE NAV ── */
+    .NAV-MOBILE {
+      display: none;
+      align-items: center;
+      gap: 10px
+    }
+
+    #LANG-TOGGLE-MOB {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      background: rgba(13,13,26,.95);
+      border: 1px solid var(--border-h);
+      border-radius: 100px;
+      overflow: hidden
+    }
+
+    .HAM {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: transparent;
+      border: 1px solid var(--border-h);
+      border-radius: 8px;
+      padding: 9px 10px;
+      cursor: pointer;
+      z-index: 600
+    }
+
+    .HAM span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all .3s
+    }
+
+    .HAM.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg)
+    }
+
+    .HAM.open span:nth-child(2) {
+      opacity: 0
+    }
+
+    .HAM.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg)
+    }
+
+    .MOB-DRAWER {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(4,4,10,.97);
+      backdrop-filter: blur(30px);
+      z-index: 490;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 100px 32px 40px
+    }
+
+    .MOB-DRAWER.open {
+      display: flex
+    }
+
+    .MOB-DRAWER .NL {
+      font-size: 28px;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 2px;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 10px 0;
+      width: 100%;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      transition: color .2s
+    }
+
+    [lang="ar"] .MOB-DRAWER .NL {
+      font-family: 'Tajawal', sans-serif;
+      letter-spacing: 0;
+      font-size: 26px
+    }
+
+    .MOB-DRAWER .NL:hover {
+      color: var(--white)
+    }
+
+    .MOB-DRAWER .BTN-P {
+      margin-top: 16px;
+      width: 100%;
+      font-size: 16px
+    }
+
+    @media(max-width:640px) {
+      .NAV-MOBILE {
+        display: flex
+      }
+    }
   </style>
 </head>
 
@@ -3197,11 +3608,7 @@
   <div class="ORB O3"></div>
 
   <!-- LANGUAGE TOGGLE -->
-  <div id="LANG-TOGGLE">
-    <button class="LT-BTN active" id="LT-EN" onclick="setLang('en')">EN</button>
-    <div class="LT-SEP"></div>
-    <button class="LT-BTN" id="LT-AR" onclick="setLang('ar')">ع</button>
-  </div>
+  <!-- moved to navbar -->
 
   <!-- NAV -->
   <nav class="NAV">
@@ -3223,11 +3630,37 @@
       <a href="#S5" class="NL"><span class="EN">Dashboard</span><span class="AR">الداشبورد</span></a>
       <a href="#S7" class="NL"><span class="EN">Roles</span><span class="AR">الصلاحيات</span></a>
       <a href="#S8" class="NL"><span class="EN">Payments</span><span class="AR">الدفع</span></a>
+      <div id="LANG-TOGGLE">
+        <button class="LT-BTN active" id="LT-EN" onclick="setLang('en')">EN</button>
+        <div class="LT-SEP"></div>
+        <button class="LT-BTN" id="LT-AR" onclick="setLang('ar')">ع</button>
+      </div>
       <button class="NAV-CTA"><span class="EN">Get Demo</span><span class="AR">جرب الآن</span></button>
+    </div>
+    <!-- Mobile: lang toggle + hamburger -->
+    <div class="NAV-MOBILE">
+      <div id="LANG-TOGGLE-MOB">
+        <button class="LT-BTN active" id="LT-EN-MOB" onclick="setLang('en')">EN</button>
+        <div class="LT-SEP"></div>
+        <button class="LT-BTN" id="LT-AR-MOB" onclick="setLang('ar')">ع</button>
+      </div>
+      <button class="HAM" id="HAM" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
   <nav class="SDOTS" id="SDOTS"></nav>
+
+  <!-- Mobile Drawer -->
+  <div class="MOB-DRAWER" id="MOB-DRAWER">
+    <a href="#S2" class="NL" onclick="closeMenu()"><span class="EN">Problem</span><span class="AR">المشكلة</span></a>
+    <a href="#S4" class="NL" onclick="closeMenu()"><span class="EN">Features</span><span class="AR">المميزات</span></a>
+    <a href="#S5" class="NL" onclick="closeMenu()"><span class="EN">Dashboard</span><span class="AR">الداشبورد</span></a>
+    <a href="#S7" class="NL" onclick="closeMenu()"><span class="EN">Roles</span><span class="AR">الصلاحيات</span></a>
+    <a href="#S8" class="NL" onclick="closeMenu()"><span class="EN">Payments</span><span class="AR">الدفع</span></a>
+    <button class="BTN-P" onclick="closeMenu()"><span class="EN">Get Demo 🚀</span><span class="AR">جرب الآن 🚀</span></button>
+  </div>
 
   <!-- ══ S1 HERO ══ -->
   <section id="S1" data-s="HERO">
@@ -3665,35 +4098,14 @@
             </div>
           </div>
         </div>
-        <div class="FC FC-F R" style="transition-delay:.3s">
-          <span class="FC-ICO">👔</span>
-          <div class="FC-TITLE"><span class="EN">Staff & HR</span><span class="AR">الموظفين والـ HR</span></div>
-          <div class="FC-DESC"><span class="EN">From hiring to payslips — attendance, salaries, leaves, and advances all
-              automated. Zero end-of-month chaos.</span><span class="AR">من التعيين للسليب — حضور وغياب ومرتبات وإجازات
-              وسلف كله أوتوماتيك. صفر فوضى آخر الشهر.</span></div>
-          <div class="FC-LIST">
-            <div class="FC-LI"><span class="EN">Daily attendance & overtime</span><span class="AR">حضور يومي وأوفر
-                تايم</span></div>
-            <div class="FC-LI"><span class="EN">Salary calc with bonuses, deductions, advances</span><span
-                class="AR">مرتبات بخصومات وبونص وسلف</span></div>
-            <div class="FC-LI"><span class="EN">Auto PDF payslips per employee</span><span class="AR">سليب PDF لكل موظف
-                أوتوماتيك</span></div>
-            <div class="FC-LI"><span class="EN">Leave management and approval</span><span class="AR">إدارة إجازات
-                واعتمادها</span></div>
-          </div>
-        </div>
         <div class="FC FC-G R" style="transition-delay:.35s">
           <span class="FC-ICO">📱</span>
           <div class="FC-TITLE"><span class="EN">Mobile — Always On</span><span class="AR">موبايل — دايماً متاح</span>
           </div>
-          <div class="FC-DESC"><span class="EN">Full dashboard on any device. No install needed. Real-time push
-              notifications for every important event.</span><span class="AR">داشبورد كامل على أي جهاز. من غير تثبيت.
-              إشعارات فورية لكل حدث مهم.</span></div>
+          <div class="FC-DESC"><span class="EN">Full dashboard on any device. No install needed. Access your marketplace anytime, anywhere.</span><span class="AR">داشبورد كامل على أي جهاز. من غير تثبيت. وصول لماركت بليسك في أي وقت ومن أي مكان.</span></div>
           <div class="FC-LIST">
             <div class="FC-LI"><span class="EN">Works on mobile, tablet, desktop</span><span class="AR">موبايل وتابلت
                 ولاب توب — كل الأجهزة</span></div>
-            <div class="FC-LI"><span class="EN">Real-time push notifications</span><span class="AR">إشعارات فورية
-                للأحداث المهمة</span></div>
             <div class="FC-LI"><span class="EN">Available 24/7 — no downtime</span><span class="AR">متاح ٢٤/٧ بدون
                 انقطاع</span></div>
             <div class="FC-LI"><span class="EN">Zero installation required</span><span class="AR">مفيش برنامج
@@ -4260,26 +4672,6 @@
               style="color:var(--a2);border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.08)"><span
                 class="EN">AUTO-MATCH</span><span class="AR">ربط أوتوماتيك</span></div>
           </div>
-          <div class="PM-CARD CARD"
-            style="--PM-COLOR:linear-gradient(90deg,var(--p2),transparent);background:rgba(255,149,0,.04);border:1px solid rgba(255,149,0,.12)">
-            <div class="PM-ICON">📅</div>
-            <div class="PM-TITLE"><span class="EN">Installments</span><span class="AR">تقسيط</span></div>
-            <div class="PM-BODY"><span class="EN">Custom payment schedules. System tracks every installment and sends
-                late reminders automatically.</span><span class="AR">جداول دفع مخصصة. السيستم بيتابع كل قسط وبيبعت تذكير
-                للتأخر أوتوماتيك.</span></div>
-            <div class="PM-TAG" style="color:var(--p2);border-color:rgba(255,149,0,.3);background:rgba(255,149,0,.08)">
-              <span class="EN">AUTO-REMINDERS</span><span class="AR">تذكير أوتوماتيك</span></div>
-          </div>
-          <div class="PM-CARD CARD"
-            style="--PM-COLOR:linear-gradient(90deg,var(--r),transparent);background:rgba(255,45,107,.04);border:1px solid rgba(255,45,107,.12)">
-            <div class="PM-ICON">📋</div>
-            <div class="PM-TITLE"><span class="EN">Credit / Deferred</span><span class="AR">آجل / دين</span></div>
-            <div class="PM-BODY"><span class="EN">Sell on credit to trusted clients. Outstanding balances tracked with
-                aging reports and overdue alerts.</span><span class="AR">بيع بالأجل لعملاء موثوقين. الأرصدة المعلقة
-                بتتتبع مع تقارير تقادم وتنبيهات تأخر.</span></div>
-            <div class="PM-TAG" style="color:var(--r);border-color:rgba(255,45,107,.3);background:rgba(255,45,107,.08)">
-              <span class="EN">AGING REPORTS</span><span class="AR">تقارير التقادم</span></div>
-          </div>
         </div>
         <div class="CARD RR" style="transition-delay:.2s">
           <div class="PAY-FLOW-BOX">
@@ -4313,8 +4705,7 @@
                 <div class="PFS-CONTENT">
                   <div class="PFS-T"><span class="EN">Payment method selected</span><span class="AR">اختيار طريقة
                       الدفع</span></div>
-                  <div class="PFS-B"><span class="EN">Cash, transfer, installment, or credit — system logs
-                      instantly.</span><span class="AR">كاش أو تحويل أو تقسيط أو آجل — السيستم بيسجل في الحال.</span>
+                  <div class="PFS-B"><span class="EN">Cash or bank transfer — system logs instantly.</span><span class="AR">كاش أو تحويل بنكي — السيستم بيسجل في الحال.</span>
                   </div>
                 </div>
               </div>
@@ -4530,11 +4921,27 @@
       root.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
       document.getElementById('LT-EN').classList.toggle('active', lang === 'en');
       document.getElementById('LT-AR').classList.toggle('active', lang === 'ar');
+      document.getElementById('LT-EN-MOB').classList.toggle('active', lang === 'en');
+      document.getElementById('LT-AR-MOB').classList.toggle('active', lang === 'ar');
       localStorage.setItem('nexus_lang', lang);
     }
     // restore
     const saved = localStorage.getItem('nexus_lang');
     if (saved) setLang(saved);
+
+    // ── MOBILE MENU
+    function toggleMenu() {
+      const drawer = document.getElementById('MOB-DRAWER');
+      const ham = document.getElementById('HAM');
+      drawer.classList.toggle('open');
+      ham.classList.toggle('open');
+      document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+    }
+    function closeMenu() {
+      document.getElementById('MOB-DRAWER').classList.remove('open');
+      document.getElementById('HAM').classList.remove('open');
+      document.body.style.overflow = '';
+    }
 
     // ── CURSOR
     const CUR = document.getElementById('CUR'), RING = document.getElementById('CUR-RING');
