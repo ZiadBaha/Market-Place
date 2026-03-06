@@ -1,0 +1,4581 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="ROOT">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS — Smart Marketplace Platform</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@300;400;500&family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;700;900&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --ink: #080810;
+      --void: #04040a;
+      --layer: #0d0d1a;
+      --glass: rgba(13, 13, 26, 0.88);
+      --border: rgba(255, 255, 255, 0.06);
+      --border-h: rgba(255, 255, 255, 0.13);
+      --white: #f5f0ff;
+      --muted: #6a6485;
+      --dim: #1a1830;
+      --p: #ff6b35;
+      --p2: #ff9500;
+      --a: #7c3aed;
+      --a2: #a855f7;
+      --b: #06ffa5;
+      --b2: #00d4ff;
+      --r: #ff2d6b;
+      --y: #ffe135;
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    ::-webkit-scrollbar {
+      width: 3px
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--void)
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--p);
+      border-radius: 2px
+    }
+
+    /* ── FONT SWITCHING ── */
+    body {
+      background: var(--void);
+      color: var(--white);
+      font-family: 'Bricolage Grotesque', sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+      transition: font-family .3s
+    }
+
+    [lang="ar"] body,
+    [lang="ar"] .BODY,
+    [lang="ar"] p,
+    [lang="ar"] .FC-DESC,
+    [lang="ar"] .FC-LI,
+    [lang="ar"] .BA-BODY,
+    [lang="ar"] .RR-NOTE,
+    [lang="ar"] .PFS-B,
+    [lang="ar"] .SF-TEXT span,
+    [lang="ar"] .AI-D,
+    [lang="ar"] .PM-BODY,
+    [lang="ar"] .PW-BODY,
+    [lang="ar"] .CL-BODY,
+    [lang="ar"] .BENE-T,
+    [lang="ar"] .DB-NAV-ITEM {
+      font-family: 'Cairo', sans-serif
+    }
+
+    [lang="ar"] .DISPLAY,
+    [lang="ar"] .CL-LINE,
+    [lang="ar"] .PW-TITLE,
+    [lang="ar"] .FC-TITLE,
+    [lang="ar"] .BA-TITLE,
+    [lang="ar"] .RR-NAME,
+    [lang="ar"] .PFB-TITLE,
+    [lang="ar"] .PM-TITLE,
+    [lang="ar"] .NL-NAME,
+    [lang="ar"] .DB-LOGO-SMALL,
+    [lang="ar"] .AUD-TITLE,
+    [lang="ar"] .FT-BRAND,
+    [lang="ar"] h1,
+    [lang="ar"] h2 {
+      font-family: 'Tajawal', sans-serif;
+      font-weight: 900;
+      letter-spacing: 0
+    }
+
+    [lang="ar"] .EYEBROW,
+    [lang="ar"] .TAG,
+    [lang="ar"] .FFD-LABEL,
+    [lang="ar"] .DB-CT,
+    [lang="ar"] .RR-LABEL,
+    [lang="ar"] .BA-STAMP,
+    [lang="ar"] .DB-KPI-L,
+    [lang="ar"] .DB-XLABEL,
+    [lang="ar"] .NL-TAG,
+    [lang="ar"] .AI-LVL,
+    [lang="ar"] .DB-LIVE,
+    [lang="ar"] .AL-M {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0
+    }
+
+    /* ── TEXT ELEMENTS AR/EN ── */
+    [data-en],
+    [data-ar] {
+      transition: opacity .25s
+    }
+
+    .AR {
+      display: none
+    }
+
+    .EN {
+      display: inline
+    }
+
+    [lang="ar"] .AR {
+      display: inline
+    }
+
+    [lang="ar"] .EN {
+      display: none
+    }
+
+    .AR-BLOCK {
+      display: none
+    }
+
+    .EN-BLOCK {
+      display: block
+    }
+
+    [lang="ar"] .AR-BLOCK {
+      display: block
+    }
+
+    [lang="ar"] .EN-BLOCK {
+      display: none
+    }
+
+    /* RTL overrides */
+    [lang="ar"] {
+      direction: rtl
+    }
+
+    [lang="ar"] .NAV {
+      direction: rtl
+    }
+
+    [lang="ar"] .NAV-LINKS {
+      flex-direction: row-reverse
+    }
+
+    [lang="ar"] .EYEBROW::before,
+    [lang="ar"] .TAG::before {
+      order: 2
+    }
+
+    [lang="ar"] .EYEBROW::after,
+    [lang="ar"] .TAG::after {
+      order: 0
+    }
+
+    [lang="ar"] .H-WRAP,
+    [lang="ar"] .SEC-LAYOUT,
+    [lang="ar"] .PAY-LAYOUT,
+    [lang="ar"] .CON-WRAP {
+      direction: rtl
+    }
+
+    [lang="ar"] .H-STATS {
+      direction: rtl
+    }
+
+    [lang="ar"] .FC-LI {
+      direction: rtl
+    }
+
+    [lang="ar"] .FC-LI::before {
+      margin-left: 0;
+      margin-right: 0
+    }
+
+    [lang="ar"] .SDOTS {
+      right: auto;
+      left: 28px
+    }
+
+    [lang="ar"] .SD::before {
+      right: auto;
+      left: 16px
+    }
+
+    [lang="ar"] .SF:hover {
+      transform: translateX(-4px)
+    }
+
+    [lang="ar"] .BENE:hover {
+      transform: translateX(-6px)
+    }
+
+    [lang="ar"] .ROLE-ROW:hover {
+      transform: translateX(6px)
+    }
+
+    [lang="ar"] .RR-INNER {
+      direction: rtl
+    }
+
+    [lang="ar"] .RR-LEFT {
+      border-right: none;
+      border-left: 1px solid var(--border)
+    }
+
+    [lang="ar"] .DB-LAYOUT {
+      direction: rtl
+    }
+
+    [lang="ar"] .DB-SIDEBAR {
+      border-right: none;
+      border-left: 1px solid var(--border)
+    }
+
+    [lang="ar"] .DB-NAV-ITEM.ACT {
+      border-right: none;
+      border-left: 2px solid var(--p)
+    }
+
+    [lang="ar"] .BA-BEFORE {
+      border-right: none;
+      border-left: 1px solid var(--border)
+    }
+
+    [lang="ar"] .PFS::after {
+      left: auto;
+      right: 18px
+    }
+
+    [lang="ar"] .PFS {
+      direction: rtl
+    }
+
+    [lang="ar"] .BENE {
+      direction: rtl
+    }
+
+    /* ── LANGUAGE TOGGLE ── */
+    #LANG-TOGGLE {
+      position: fixed;
+      top: 50%;
+      right: 28px;
+      transform: translateY(-50%) translateX(0);
+      z-index: 600;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      background: rgba(13, 13, 26, .95);
+      border: 1px solid var(--border-h);
+      border-radius: 100px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .5)
+    }
+
+    [lang="ar"] #LANG-TOGGLE {
+      right: auto;
+      left: 28px
+    }
+
+    .LT-BTN {
+      padding: 12px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: all .3s;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .LT-BTN.active {
+      background: linear-gradient(135deg, var(--p), var(--a));
+      color: var(--void)
+    }
+
+    .LT-BTN:hover:not(.active) {
+      color: var(--white);
+      background: rgba(255, 255, 255, .04)
+    }
+
+    .LT-SEP {
+      height: 1px;
+      background: var(--border);
+      width: 100%
+    }
+
+    /* ── SCANLINES + GRAIN ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.025) 2px, rgba(0, 0, 0, 0.025) 4px);
+      animation: scanroll 8s linear infinite
+    }
+
+    @keyframes scanroll {
+      0% {
+        background-position: 0 0
+      }
+
+      100% {
+        background-position: 0 200px
+      }
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: .03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+      background-size: 200px
+    }
+
+    .GRID {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(124, 58, 237, .04) 1px, transparent 1px), linear-gradient(90deg, rgba(124, 58, 237, .04) 1px, transparent 1px);
+      background-size: 100px 100px
+    }
+
+    .ORB {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(160px)
+    }
+
+    .O1 {
+      width: 900px;
+      height: 900px;
+      background: rgba(124, 58, 237, .06);
+      top: -400px;
+      left: -400px;
+      animation: op1 22s ease-in-out infinite alternate
+    }
+
+    .O2 {
+      width: 700px;
+      height: 700px;
+      background: rgba(255, 107, 53, .05);
+      bottom: -300px;
+      right: -300px;
+      animation: op2 18s ease-in-out infinite alternate
+    }
+
+    .O3 {
+      width: 500px;
+      height: 500px;
+      background: rgba(6, 255, 165, .04);
+      top: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: op3 26s ease-in-out infinite alternate
+    }
+
+    @keyframes op1 {
+      to {
+        transform: translate(80px, 60px) scale(1.15)
+      }
+    }
+
+    @keyframes op2 {
+      to {
+        transform: translate(-60px, 80px) scale(.85)
+      }
+    }
+
+    @keyframes op3 {
+      to {
+        transform: translateX(-50%) translate(40px, -50px) scale(1.2)
+      }
+    }
+
+    /* ── CURSOR ── */
+    #CUR {
+      position: fixed;
+      z-index: 9999;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: exclusion
+    }
+
+    #CUR-RING {
+      position: fixed;
+      z-index: 9998;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 107, 53, 0.4);
+      transition: all .5s cubic-bezier(.23, 1, .32, 1)
+    }
+
+    #PROG {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      z-index: 700;
+      background: linear-gradient(90deg, var(--a), var(--p), var(--b));
+      width: 0%
+    }
+
+    /* ── NAV ── */
+    .NAV {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 500;
+      padding: 20px 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(180deg, rgba(4, 4, 10, .97) 0%, transparent 100%);
+      backdrop-filter: blur(30px)
+    }
+
+    .NAV-LOGO {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .NL-MARK svg {
+      display: block
+    }
+
+    .NL-NAME {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 3px;
+      line-height: 1
+    }
+
+    [lang="ar"] .NL-NAME {
+      font-family: 'Tajawal', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0
+    }
+
+    .NL-TAG {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--p);
+      letter-spacing: 2px;
+      margin-top: -3px
+    }
+
+    [lang="ar"] .NL-TAG {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 9px
+    }
+
+    .NAV-LINKS {
+      display: flex;
+      gap: 36px;
+      align-items: center
+    }
+
+    .NL {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: .3px;
+      transition: color .2s;
+      position: relative
+    }
+
+    [lang="ar"] .NL {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 14px
+    }
+
+    .NL::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--p);
+      transform: scaleX(0);
+      transition: transform .3s;
+      transform-origin: right
+    }
+
+    .NL:hover {
+      color: var(--white)
+    }
+
+    .NL:hover::after,
+    .NL.on::after {
+      transform: scaleX(1);
+      transform-origin: left
+    }
+
+    .NL.on {
+      color: var(--white)
+    }
+
+    .NAV-CTA {
+      padding: 10px 24px;
+      background: linear-gradient(135deg, var(--p), var(--p2));
+      color: var(--void);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Bebas Neue', sans-serif;
+      transition: all .3s;
+      box-shadow: 0 0 30px rgba(255, 107, 53, .3)
+    }
+
+    [lang="ar"] .NAV-CTA {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 13px
+    }
+
+    .NAV-CTA:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 50px rgba(255, 107, 53, .5)
+    }
+
+    /* ── SIDE DOTS ── */
+    .SDOTS {
+      position: fixed;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 400
+    }
+
+    .SD {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--dim);
+      border: none;
+      cursor: pointer;
+      transition: all .3s;
+      position: relative
+    }
+
+    .SD.on {
+      background: var(--p);
+      box-shadow: 0 0 8px var(--p);
+      height: 24px;
+      border-radius: 2px
+    }
+
+    .SD::before {
+      content: attr(data-s);
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity .2s;
+      letter-spacing: 1px
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      min-height: 100vh;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 72px;
+      overflow: hidden
+    }
+
+    .C {
+      max-width: 1280px;
+      width: 100%
+    }
+
+    .R {
+      opacity: 0;
+      transform: translateY(60px) skewY(1deg);
+      transition: opacity 1s cubic-bezier(.16, 1, .3, 1), transform 1s cubic-bezier(.16, 1, .3, 1)
+    }
+
+    .RL {
+      opacity: 0;
+      transform: translateX(-80px);
+      transition: opacity 1s cubic-bezier(.16, 1, .3, 1), transform 1s cubic-bezier(.16, 1, .3, 1)
+    }
+
+    .RR {
+      opacity: 0;
+      transform: translateX(80px);
+      transition: opacity 1s cubic-bezier(.16, 1, .3, 1), transform 1s cubic-bezier(.16, 1, .3, 1)
+    }
+
+    .RS {
+      opacity: 0;
+      transform: scale(.92);
+      transition: opacity 1s cubic-bezier(.16, 1, .3, 1), transform 1s cubic-bezier(.16, 1, .3, 1)
+    }
+
+    .R.V,
+    .RL.V,
+    .RR.V,
+    .RS.V {
+      opacity: 1;
+      transform: none
+    }
+
+    /* ── TYPE ── */
+    .EYEBROW {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--p);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .EYEBROW::before,
+    .EYEBROW::after {
+      content: '';
+      flex: 0 0 30px;
+      height: 1px;
+      background: var(--p)
+    }
+
+    .DISPLAY {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 8.5vw, 130px);
+      line-height: .93;
+      letter-spacing: 2px;
+      margin-bottom: 24px
+    }
+
+    [lang="ar"] .DISPLAY {
+      font-size: clamp(44px, 7vw, 110px);
+      line-height: 1.05;
+      letter-spacing: 0
+    }
+
+    .D-OUTLINE {
+      -webkit-text-stroke: 1px rgba(255, 255, 255, .2);
+      -webkit-text-fill-color: transparent;
+      color: transparent
+    }
+
+    .BODY {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.9;
+      max-width: 560px;
+      font-weight: 400
+    }
+
+    [lang="ar"] .BODY {
+      font-size: 16px;
+      line-height: 2
+    }
+
+    .TAG {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 107, 53, .08);
+      border: 1px solid rgba(255, 107, 53, .2);
+      color: var(--p);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 4px;
+      margin-bottom: 20px
+    }
+
+    [lang="ar"] .TAG {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 11px
+    }
+
+    .TAG::before {
+      content: '▶';
+      font-size: 7px;
+      animation: blink 1.5s infinite
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .2
+      }
+    }
+
+    .BTN-P {
+      padding: 16px 40px;
+      background: linear-gradient(135deg, var(--p), var(--p2));
+      color: var(--void);
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Bebas Neue', sans-serif;
+      transition: all .3s;
+      box-shadow: 0 0 40px rgba(255, 107, 53, .3)
+    }
+
+    [lang="ar"] .BTN-P {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 15px;
+      font-weight: 700
+    }
+
+    .BTN-P:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 0 70px rgba(255, 107, 53, .6)
+    }
+
+    .BTN-G {
+      padding: 16px 40px;
+      background: transparent;
+      color: var(--white);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-radius: 6px;
+      border: 1px solid var(--border-h);
+      cursor: pointer;
+      font-family: 'Bebas Neue', sans-serif;
+      transition: all .3s
+    }
+
+    [lang="ar"] .BTN-G {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 15px
+    }
+
+    .BTN-G:hover {
+      border-color: rgba(255, 255, 255, .4);
+      background: rgba(255, 255, 255, .04)
+    }
+
+    .CARD {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      backdrop-filter: blur(20px);
+      position: relative;
+      overflow: hidden;
+      transition: all .5s cubic-bezier(.16, 1, .3, 1)
+    }
+
+    .DIV {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 107, 53, .15), rgba(124, 58, 237, .15), transparent);
+      margin: 0 72px;
+      position: relative;
+      z-index: 2
+    }
+
+    /* ═══ S1 HERO ═══ */
+    #S1 {
+      background: radial-gradient(ellipse 80% 70% at 50% 40%, rgba(124, 58, 237, .08) 0%, transparent 60%)
+    }
+
+    .H-WRAP {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center
+    }
+
+    .H-TITLE-LINE {
+      overflow: hidden
+    }
+
+    .H-TITLE-LINE .DISPLAY {
+      animation: slideUp 1s cubic-bezier(.16, 1, .3, 1) both
+    }
+
+    .H-TITLE-LINE:nth-child(2) .DISPLAY {
+      animation-delay: .12s
+    }
+
+    .H-TITLE-LINE:nth-child(3) .DISPLAY {
+      animation-delay: .24s
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(100%);
+        opacity: 0
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1
+      }
+    }
+
+    .H-GRAD {
+      background: linear-gradient(135deg, var(--p) 0%, var(--p2) 40%, var(--y) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text
+    }
+
+    .H-BODY {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 40px;
+      max-width: 480px;
+      animation: fadeIn .8s ease .5s both
+    }
+
+    [lang="ar"] .H-BODY {
+      font-size: 16px;
+      line-height: 2
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .H-BTNS {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 56px;
+      animation: fadeIn .8s ease .6s both
+    }
+
+    .H-STATS {
+      display: flex;
+      gap: 0;
+      animation: fadeIn .8s ease .7s both;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden
+    }
+
+    .HS {
+      padding: 24px 32px;
+      flex: 1;
+      text-align: center;
+      border-right: 1px solid var(--border);
+      position: relative
+    }
+
+    [lang="ar"] .HS:first-child {
+      border-right: 1px solid var(--border)
+    }
+
+    [lang="ar"] .HS:last-child {
+      border-right: none
+    }
+
+    .HS:last-child {
+      border-right: none
+    }
+
+    .HSV {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 42px;
+      letter-spacing: 1px;
+      line-height: 1
+    }
+
+    [lang="ar"] .HSV {
+      font-family: 'Tajawal', sans-serif;
+      font-size: 36px;
+      font-weight: 900
+    }
+
+    .HSL {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: var(--muted);
+      margin-top: 6px;
+      text-transform: uppercase
+    }
+
+    [lang="ar"] .HSL {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 10px
+    }
+
+    .H-RIGHT {
+      position: relative;
+      height: 580px;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .PHONE-SHELL {
+      width: 280px;
+      height: 560px;
+      border-radius: 44px;
+      background: linear-gradient(160deg, #1a1030, #0a0818);
+      border: 1.5px solid rgba(124, 58, 237, .35);
+      box-shadow: 0 0 100px rgba(124, 58, 237, .15), inset 0 0 60px rgba(0, 0, 0, .6);
+      position: relative;
+      z-index: 3;
+      animation: phoneAnim 7s ease-in-out infinite alternate;
+      overflow: hidden
+    }
+
+    @keyframes phoneAnim {
+      from {
+        transform: perspective(800px) rotateY(-8deg) rotateX(3deg) translateY(0)
+      }
+
+      to {
+        transform: perspective(800px) rotateY(6deg) rotateX(-2deg) translateY(-16px)
+      }
+    }
+
+    .P-NOTCH {
+      width: 90px;
+      height: 7px;
+      background: rgba(255, 255, 255, .08);
+      border-radius: 4px;
+      margin: 14px auto 0
+    }
+
+    .P-SCREEN {
+      padding: 14px 14px 0
+    }
+
+    .P-STATUS {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: rgba(255, 255, 255, .3);
+      margin-bottom: 12px
+    }
+
+    .P-APP-HEADER {
+      background: linear-gradient(135deg, rgba(255, 107, 53, .2), rgba(124, 58, 237, .15));
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(255, 107, 53, .15)
+    }
+
+    .P-APP-NAME {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 2px;
+      color: var(--p);
+      margin-bottom: 2px
+    }
+
+    .P-APP-SUB {
+      font-size: 9px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    .P-SEARCH {
+      background: rgba(255, 255, 255, .05);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 10px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .P-CATS {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 10px;
+      overflow: hidden
+    }
+
+    .P-CAT {
+      padding: 5px 10px;
+      border-radius: 100px;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      white-space: nowrap;
+      border: 1px solid
+    }
+
+    .P-CAT.ac {
+      background: rgba(255, 107, 53, .2);
+      border-color: var(--p);
+      color: var(--p)
+    }
+
+    .P-CAT.in {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--muted)
+    }
+
+    .P-ITEMS {
+      display: flex;
+      flex-direction: column;
+      gap: 7px
+    }
+
+    .P-ITEM {
+      background: rgba(255, 255, 255, .04);
+      border-radius: 10px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all .3s
+    }
+
+    .P-ITEM-IMG {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px
+    }
+
+    .P-ITEM-INFO {
+      flex: 1;
+      min-width: 0
+    }
+
+    .P-ITEM-NAME {
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis
+    }
+
+    .P-ITEM-BRAND {
+      font-size: 9px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 1px
+    }
+
+    .P-ITEM-PRICE {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--p);
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: .5px
+    }
+
+    .P-ITEM-STOCK {
+      font-size: 8px;
+      margin-top: 1px;
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    .F-CHIP {
+      position: absolute;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 16px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, .5);
+      z-index: 4;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap
+    }
+
+    .FC1 {
+      top: 40px;
+      right: -160px;
+      animation: fc1 5s ease-in-out infinite alternate
+    }
+
+    .FC2 {
+      bottom: 120px;
+      left: -170px;
+      animation: fc2 6s ease-in-out infinite alternate;
+      animation-delay: -2s
+    }
+
+    .FC3 {
+      bottom: 30px;
+      right: -120px;
+      animation: fc3 7s ease-in-out infinite alternate;
+      animation-delay: -1s
+    }
+
+    [lang="ar"] .FC1 {
+      right: auto;
+      left: -160px
+    }
+
+    [lang="ar"] .FC2 {
+      left: auto;
+      right: -170px
+    }
+
+    [lang="ar"] .FC3 {
+      right: auto;
+      left: -120px
+    }
+
+    @keyframes fc1 {
+      from {
+        transform: translateY(0)
+      }
+
+      to {
+        transform: translateY(-10px)
+      }
+    }
+
+    @keyframes fc2 {
+      from {
+        transform: translateY(0)
+      }
+
+      to {
+        transform: translateY(8px)
+      }
+    }
+
+    @keyframes fc3 {
+      from {
+        transform: translateY(0) rotate(-1deg)
+      }
+
+      to {
+        transform: translateY(-8px) rotate(1deg)
+      }
+    }
+
+    /* ═══ S2 PROBLEM ═══ */
+    #S2 {
+      background: radial-gradient(ellipse 50% 60% at 50% 70%, rgba(255, 45, 107, .05), transparent)
+    }
+
+    .PW-GRID {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border)
+    }
+
+    .PW-CELL {
+      background: var(--void);
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+      transition: all .4s cubic-bezier(.16, 1, .3, 1)
+    }
+
+    .PW-CELL:hover {
+      background: rgba(255, 45, 107, .04)
+    }
+
+    .PW-CELL::before {
+      content: attr(data-n);
+      position: absolute;
+      top: -10px;
+      right: 24px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 120px;
+      color: rgba(255, 45, 107, .04);
+      line-height: 1;
+      letter-spacing: -4px;
+      pointer-events: none;
+      transition: color .4s
+    }
+
+    [lang="ar"] .PW-CELL::before {
+      right: auto;
+      left: 24px
+    }
+
+    .PW-CELL:hover::before {
+      color: rgba(255, 45, 107, .08)
+    }
+
+    .PW-ICON {
+      font-size: 44px;
+      margin-bottom: 24px;
+      display: block
+    }
+
+    .PW-TITLE {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+      line-height: 1.1
+    }
+
+    .PW-BODY {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.85
+    }
+
+    [lang="ar"] .PW-BODY {
+      font-size: 14px;
+      line-height: 2
+    }
+
+    .PW-PILL {
+      display: inline-block;
+      margin-top: 18px;
+      background: rgba(255, 45, 107, .1);
+      border: 1px solid rgba(255, 45, 107, .2);
+      color: var(--r);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      padding: 5px 14px;
+      border-radius: 4px;
+      letter-spacing: 2px;
+      text-transform: uppercase
+    }
+
+    [lang="ar"] .PW-PILL {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 10px
+    }
+
+    /* ═══ S3 CONCEPT / ORBITAL ═══ */
+    #S3 {
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(6, 255, 165, .04), transparent)
+    }
+
+    .CON-WRAP {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 80px;
+      align-items: center
+    }
+
+    .CON-VIS {
+      position: relative;
+      height: 500px
+    }
+
+    .ORB-RING {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid;
+      animation: orbit linear infinite;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%)
+    }
+
+    .OR1 {
+      width: 200px;
+      height: 200px;
+      border-color: rgba(255, 107, 53, .2);
+      animation-duration: 20s
+    }
+
+    .OR2 {
+      width: 330px;
+      height: 330px;
+      border-color: rgba(124, 58, 237, .15);
+      animation-duration: 30s;
+      animation-direction: reverse
+    }
+
+    .OR3 {
+      width: 460px;
+      height: 460px;
+      border-color: rgba(6, 255, 165, .1);
+      animation-duration: 45s
+    }
+
+    @keyframes orbit {
+      from {
+        transform: translate(-50%, -50%) rotate(0deg)
+      }
+
+      to {
+        transform: translate(-50%, -50%) rotate(360deg)
+      }
+    }
+
+    .ORB-CENTER {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--p), var(--a));
+      box-shadow: 0 0 60px rgba(124, 58, 237, .4), 0 0 120px rgba(255, 107, 53, .2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+      z-index: 2;
+      animation: corePulse 3s ease-in-out infinite alternate;
+      text-align: center;
+      gap: 2px
+    }
+
+    @keyframes corePulse {
+      from {
+        box-shadow: 0 0 40px rgba(124, 58, 237, .3), 0 0 80px rgba(255, 107, 53, .15)
+      }
+
+      to {
+        box-shadow: 0 0 80px rgba(124, 58, 237, .6), 0 0 160px rgba(255, 107, 53, .3)
+      }
+    }
+
+    .SAT-NODE {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      border: 1px solid;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .4);
+      transition: transform .3s
+    }
+
+    .SAT-NODE:hover {
+      transform: scale(1.2)
+    }
+
+    .SAT-LABEL {
+      font-size: 9px;
+      font-family: 'JetBrains Mono', monospace;
+      text-align: center;
+      margin-top: 6px;
+      color: var(--muted);
+      white-space: nowrap;
+      letter-spacing: 1px
+    }
+
+    [lang="ar"] .SAT-LABEL {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 10px
+    }
+
+    /* ═══ S4 FEATURES ═══ */
+    #S4 {
+      background: linear-gradient(180deg, transparent, rgba(124, 58, 237, .03) 50%, transparent)
+    }
+
+    .FT-GRID {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 20px
+    }
+
+    .FC {
+      border-radius: 20px;
+      padding: 32px;
+      transition: all .5s cubic-bezier(.16, 1, .3, 1);
+      position: relative;
+      overflow: hidden
+    }
+
+    .FC:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255, 255, 255, .15) !important;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, .5)
+    }
+
+    .FC::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      transform: scaleX(0);
+      transition: transform .5s;
+      transform-origin: left
+    }
+
+    [lang="ar"] .FC::before {
+      transform-origin: right
+    }
+
+    .FC:hover::before {
+      transform: scaleX(1)
+    }
+
+    .FC-A {
+      grid-column: span 5;
+      background: rgba(255, 107, 53, .04);
+      border: 1px solid rgba(255, 107, 53, .12)
+    }
+
+    .FC-A::before {
+      background: linear-gradient(90deg, var(--p), var(--p2))
+    }
+
+    .FC-B {
+      grid-column: span 7;
+      background: rgba(124, 58, 237, .04);
+      border: 1px solid rgba(124, 58, 237, .12)
+    }
+
+    .FC-B::before {
+      background: linear-gradient(90deg, var(--a), var(--a2))
+    }
+
+    .FC-C {
+      grid-column: span 4;
+      background: rgba(6, 255, 165, .03);
+      border: 1px solid rgba(6, 255, 165, .1)
+    }
+
+    .FC-D {
+      grid-column: span 4;
+      background: rgba(0, 212, 255, .03);
+      border: 1px solid rgba(0, 212, 255, .1)
+    }
+
+    .FC-E {
+      grid-column: span 4;
+      background: rgba(255, 229, 53, .03);
+      border: 1px solid rgba(255, 229, 53, .1)
+    }
+
+    .FC-F {
+      grid-column: span 6;
+      background: rgba(255, 45, 107, .03);
+      border: 1px solid rgba(255, 45, 107, .1)
+    }
+
+    .FC-G {
+      grid-column: span 6;
+      background: rgba(124, 58, 237, .04);
+      border: 1px solid rgba(124, 58, 237, .12)
+    }
+
+    .FC-ICO {
+      font-size: 36px;
+      margin-bottom: 20px;
+      display: block
+    }
+
+    .FC-TITLE {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      line-height: 1.1
+    }
+
+    .FC-DESC {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 16px
+    }
+
+    [lang="ar"] .FC-DESC {
+      line-height: 2
+    }
+
+    .FC-LIST {
+      display: flex;
+      flex-direction: column;
+      gap: 8px
+    }
+
+    .FC-LI {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, .5);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.6
+    }
+
+    .FC-LI::before {
+      content: '◆';
+      font-size: 6px;
+      color: var(--p);
+      flex-shrink: 0;
+      margin-top: 5px
+    }
+
+    .FT-FILTER-DEMO {
+      margin-top: 20px;
+      background: rgba(0, 0, 0, .4);
+      border-radius: 12px;
+      padding: 18px;
+      border: 1px solid var(--border)
+    }
+
+    .FFD-LABEL {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px
+    }
+
+    [lang="ar"] .FFD-LABEL {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 10px
+    }
+
+    .FFD-ROW {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 8px
+    }
+
+    .FFD-TAG {
+      padding: 5px 12px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      border: 1px solid;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: .5px
+    }
+
+    [lang="ar"] .FFD-TAG {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 11px
+    }
+
+    .FFD-TAG.aO {
+      background: rgba(255, 107, 53, .15);
+      border-color: var(--p);
+      color: var(--p)
+    }
+
+    .FFD-TAG.aV {
+      background: rgba(124, 58, 237, .15);
+      border-color: var(--a2);
+      color: var(--a2)
+    }
+
+    .FFD-TAG.aG {
+      background: rgba(6, 255, 165, .1);
+      border-color: var(--b);
+      color: var(--b)
+    }
+
+    .FFD-TAG.idle {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--muted)
+    }
+
+    .FFD-RESULT {
+      margin-top: 10px;
+      padding: 10px;
+      background: rgba(6, 255, 165, .06);
+      border-radius: 8px;
+      border: 1px solid rgba(6, 255, 165, .15);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--b);
+      letter-spacing: .5px
+    }
+
+    [lang="ar"] .FFD-RESULT {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 11px
+    }
+
+    .PAY-MINI {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px
+    }
+
+    .PM-ROW {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, .04);
+      border-radius: 8px;
+      border: 1px solid var(--border)
+    }
+
+    .PM-LEFT {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px
+    }
+
+    .PM-ICO {
+      font-size: 16px
+    }
+
+    .PM-STATUS {
+      font-size: 9px;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      letter-spacing: .5px
+    }
+
+    [lang="ar"] .PM-STATUS {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 10px
+    }
+
+    .PS-PAID {
+      background: rgba(6, 255, 165, .15);
+      color: var(--b)
+    }
+
+    .PS-PEND {
+      background: rgba(255, 229, 53, .15);
+      color: var(--y)
+    }
+
+    .PS-LATE {
+      background: rgba(255, 45, 107, .15);
+      color: var(--r)
+    }
+
+    .ANL-MINI {
+      margin-top: 18px
+    }
+
+    .ANL-BARS {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      height: 60px;
+      margin-bottom: 8px
+    }
+
+    .ANL-B {
+      flex: 1;
+      border-radius: 4px 4px 0 0;
+      animation: bGrow 1.5s ease both;
+      transform-origin: bottom
+    }
+
+    @keyframes bGrow {
+      from {
+        transform: scaleY(0)
+      }
+
+      to {
+        transform: scaleY(1)
+      }
+    }
+
+    .ANL-LBLS {
+      display: flex;
+      gap: 6px
+    }
+
+    .ANL-LBL {
+      flex: 1;
+      text-align: center;
+      font-size: 8px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    [lang="ar"] .ANL-LBL {
+      font-family: 'Cairo', sans-serif;
+      font-size: 9px
+    }
+
+    /* ═══ S5 DASHBOARD ═══ */
+    #S5 {
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(124, 58, 237, .05), transparent);
+      padding-bottom: 80px
+    }
+
+    .DB-FRAME {
+      background: var(--layer);
+      border: 1px solid var(--border-h);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 60px 160px rgba(0, 0, 0, .7), 0 0 80px rgba(124, 58, 237, .08)
+    }
+
+    .DB-TITLEBAR {
+      background: rgba(0, 0, 0, .5);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .DB-DOTS {
+      display: flex;
+      gap: 7px
+    }
+
+    .DB-DOT {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%
+    }
+
+    .DB-APPNAME {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 2px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, .4);
+      margin-left: 8px
+    }
+
+    [lang="ar"] .DB-APPNAME {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      margin-left: 0;
+      margin-right: 8px
+    }
+
+    .DB-LIVE {
+      margin-left: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--b)
+    }
+
+    [lang="ar"] .DB-LIVE {
+      margin-left: 0;
+      margin-right: auto;
+      font-family: 'Cairo', sans-serif;
+      font-size: 10px
+    }
+
+    .DB-LIVE::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--b);
+      box-shadow: 0 0 8px var(--b);
+      animation: blink 2s infinite
+    }
+
+    .DB-LAYOUT {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      height: 520px
+    }
+
+    .DB-SIDEBAR {
+      background: rgba(0, 0, 0, .3);
+      border-right: 1px solid var(--border);
+      padding: 20px 0
+    }
+
+    .DB-LOGO-SMALL {
+      padding: 0 18px 20px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 2px;
+      color: var(--p);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 16px
+    }
+
+    [lang="ar"] .DB-LOGO-SMALL {
+      font-family: 'Tajawal', sans-serif;
+      font-weight: 900;
+      font-size: 18px;
+      letter-spacing: 0;
+      padding: 0 18px 20px;
+      text-align: right
+    }
+
+    .DB-NAV-ITEM {
+      padding: 10px 18px;
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all .2s;
+      font-weight: 500
+    }
+
+    [lang="ar"] .DB-NAV-ITEM {
+      flex-direction: row-reverse;
+      text-align: right;
+      justify-content: flex-end
+    }
+
+    .DB-NAV-ITEM.ACT {
+      background: rgba(255, 107, 53, .08);
+      color: var(--white);
+      border-right: 2px solid var(--p)
+    }
+
+    .DB-NAV-ITEM:hover:not(.ACT) {
+      background: rgba(255, 255, 255, .03);
+      color: var(--white)
+    }
+
+    .DB-NAV-SECTION {
+      padding: 14px 18px 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: rgba(255, 255, 255, .2);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 8px
+    }
+
+    [lang="ar"] .DB-NAV-SECTION {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 10px;
+      text-align: right
+    }
+
+    .DB-NAV-ICO {
+      font-size: 14px;
+      width: 18px;
+      text-align: center
+    }
+
+    .DB-NAV-BADGE {
+      margin-left: auto;
+      background: var(--p);
+      color: var(--void);
+      font-size: 9px;
+      padding: 2px 7px;
+      border-radius: 100px;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    [lang="ar"] .DB-NAV-BADGE {
+      margin-left: 0;
+      margin-right: auto
+    }
+
+    .DB-MAIN {
+      padding: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 16px
+    }
+
+    .DB-TOPROW {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px
+    }
+
+    .DB-KPI {
+      border-radius: 12px;
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border)
+    }
+
+    .DB-KPI::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px
+    }
+
+    .KPI-A {
+      background: rgba(255, 107, 53, .06)
+    }
+
+    .KPI-A::after {
+      background: linear-gradient(90deg, var(--p), var(--p2))
+    }
+
+    .KPI-B {
+      background: rgba(6, 255, 165, .05)
+    }
+
+    .KPI-B::after {
+      background: linear-gradient(90deg, var(--b), var(--b2))
+    }
+
+    .KPI-C {
+      background: rgba(124, 58, 237, .06)
+    }
+
+    .KPI-C::after {
+      background: linear-gradient(90deg, var(--a), var(--a2))
+    }
+
+    .KPI-D {
+      background: rgba(255, 229, 53, .04)
+    }
+
+    .KPI-D::after {
+      background: linear-gradient(90deg, var(--y), var(--p))
+    }
+
+    .DB-KPI-V {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: -.5px;
+      line-height: 1;
+      margin-bottom: 4px
+    }
+
+    [lang="ar"] .DB-KPI-V {
+      font-family: 'Tajawal', sans-serif;
+      font-weight: 900;
+      font-size: 26px;
+      letter-spacing: 0
+    }
+
+    .DB-KPI-L {
+      font-size: 10px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: .5px
+    }
+
+    [lang="ar"] .DB-KPI-L {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 11px;
+      text-align: right
+    }
+
+    .DB-KPI-T {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      font-size: 9px;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 3px 8px;
+      border-radius: 4px
+    }
+
+    [lang="ar"] .DB-KPI-T {
+      right: auto;
+      left: 14px
+    }
+
+    .T-UP {
+      background: rgba(6, 255, 165, .15);
+      color: var(--b)
+    }
+
+    .T-DN {
+      background: rgba(255, 45, 107, .15);
+      color: var(--r)
+    }
+
+    .DB-BOTROW {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 12px;
+      flex: 1
+    }
+
+    .DB-CHART-BOX {
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .02)
+    }
+
+    .DB-CT {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: .5px
+    }
+
+    [lang="ar"] .DB-CT {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 12px;
+      flex-direction: row-reverse
+    }
+
+    .DB-CT span {
+      color: var(--b);
+      font-weight: 600
+    }
+
+    .DB-BARS {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 100px
+    }
+
+    .DB-BAR {
+      flex: 1;
+      border-radius: 4px 4px 0 0;
+      animation: bGrow 2s ease both;
+      transform-origin: bottom
+    }
+
+    .DB-XLABELS {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px
+    }
+
+    .DB-XLABEL {
+      flex: 1;
+      text-align: center;
+      font-size: 9px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    .DB-LIST-BOX {
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .02);
+      overflow: hidden
+    }
+
+    .DB-LI {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .04)
+    }
+
+    [lang="ar"] .DB-LI {
+      flex-direction: row-reverse
+    }
+
+    .DB-LI:last-child {
+      border-bottom: none
+    }
+
+    .DB-LI-D {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    .DB-LI-N {
+      flex: 1;
+      font-size: 11.5px;
+      font-weight: 500
+    }
+
+    [lang="ar"] .DB-LI-N {
+      text-align: right
+    }
+
+    .DB-LI-V {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      letter-spacing: .5px
+    }
+
+    [lang="ar"] .DB-LI-V {
+      font-family: 'Tajawal', sans-serif;
+      font-weight: 900;
+      letter-spacing: 0
+    }
+
+    .DB-LI-P {
+      font-size: 9px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      width: 32px;
+      text-align: right
+    }
+
+    [lang="ar"] .DB-LI-P {
+      text-align: left
+    }
+
+    /* ═══ S6 BEFORE/AFTER ═══ */
+    #S6 {
+      background: radial-gradient(ellipse 50% 60% at 50% 50%, rgba(255, 229, 53, .03), transparent)
+    }
+
+    .BA-TABLE {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      background: var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border)
+    }
+
+    .BA-ROW {
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      background: var(--void);
+      transition: background .3s;
+      position: relative
+    }
+
+    .BA-ROW:hover {
+      background: var(--layer)
+    }
+
+    .BA-BEFORE {
+      padding: 32px 40px;
+      border-right: 1px solid var(--border);
+      background: rgba(255, 45, 107, .025)
+    }
+
+    .BA-AFTER {
+      padding: 32px 40px;
+      background: rgba(6, 255, 165, .025)
+    }
+
+    .BA-MID {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, .02);
+      font-size: 16px;
+      color: var(--muted);
+      position: relative
+    }
+
+    .BA-MID::before,
+    .BA-MID::after {
+      content: '';
+      position: absolute;
+      top: 10%;
+      bottom: 10%;
+      width: 1px;
+      background: var(--border)
+    }
+
+    .BA-MID::before {
+      right: 0
+    }
+
+    .BA-MID::after {
+      left: 0
+    }
+
+    .BA-FLOAT {
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--void);
+      border: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--p);
+      padding: 3px 14px;
+      border-radius: 4px;
+      white-space: nowrap;
+      letter-spacing: 2px;
+      text-transform: uppercase
+    }
+
+    [lang="ar"] .BA-FLOAT {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 10px
+    }
+
+    .BA-STAMP {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      font-weight: 700
+    }
+
+    [lang="ar"] .BA-STAMP {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 10px
+    }
+
+    .BA-STAMP.B {
+      color: var(--r)
+    }
+
+    .BA-STAMP.A {
+      color: var(--b)
+    }
+
+    .BA-TITLE {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: .5px;
+      margin-bottom: 10px;
+      line-height: 1
+    }
+
+    .BA-BODY {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.85
+    }
+
+    [lang="ar"] .BA-BODY {
+      line-height: 2
+    }
+
+    /* ═══ S7 ROLES ═══ */
+    #S7 {
+      background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(168, 85, 247, .05), transparent)
+    }
+
+    .ROLE-GRID {
+      display: flex;
+      flex-direction: column;
+      gap: 16px
+    }
+
+    .ROLE-ROW {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: all .4s cubic-bezier(.16, 1, .3, 1)
+    }
+
+    .ROLE-ROW:hover {
+      border-color: rgba(255, 255, 255, .12);
+      transform: translateX(-6px)
+    }
+
+    .RR-INNER {
+      display: grid;
+      grid-template-columns: 240px 1fr
+    }
+
+    .RR-LEFT {
+      padding: 32px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden
+    }
+
+    .RR-LEFT::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--RC);
+      opacity: .6
+    }
+
+    .RR-EMO {
+      font-size: 42px;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 12px
+    }
+
+    .RR-NAME {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      letter-spacing: 1px;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 2px
+    }
+
+    .RR-TITLE {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--muted);
+      letter-spacing: 2px;
+      position: relative;
+      z-index: 1
+    }
+
+    [lang="ar"] .RR-TITLE {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 10px
+    }
+
+    .RR-BADGE {
+      display: inline-block;
+      margin-top: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 4px;
+      position: relative;
+      z-index: 1;
+      border: 1px solid;
+      letter-spacing: 1px;
+      text-transform: uppercase
+    }
+
+    [lang="ar"] .RR-BADGE {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 10px
+    }
+
+    .RR-RIGHT {
+      padding: 32px 40px
+    }
+
+    .RR-LABEL {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+      display: block
+    }
+
+    [lang="ar"] .RR-LABEL {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 11px;
+      text-align: right
+    }
+
+    .ACCESS-G {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-bottom: 16px
+    }
+
+    .AI {
+      border-radius: 10px;
+      padding: 14px 12px;
+      border: 1px solid;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: all .25s
+    }
+
+    .AI:hover {
+      transform: translateY(-4px)
+    }
+
+    .AI.OK {
+      background: rgba(6, 255, 165, .06);
+      border-color: rgba(6, 255, 165, .2)
+    }
+
+    .AI.PART {
+      background: rgba(255, 229, 53, .06);
+      border-color: rgba(255, 229, 53, .2)
+    }
+
+    .AI.NO {
+      background: rgba(255, 45, 107, .04);
+      border-color: rgba(255, 45, 107, .12);
+      opacity: .45
+    }
+
+    .AI-ICO {
+      font-size: 16px
+    }
+
+    .AI-N {
+      font-size: 11px;
+      font-weight: 700
+    }
+
+    .AI.OK .AI-N {
+      color: var(--white)
+    }
+
+    .AI.PART .AI-N {
+      color: var(--y)
+    }
+
+    .AI.NO .AI-N {
+      color: var(--muted)
+    }
+
+    .AI-LVL {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      padding: 3px 7px;
+      border-radius: 3px;
+      width: fit-content
+    }
+
+    .AI.OK .AI-LVL {
+      background: rgba(6, 255, 165, .2);
+      color: var(--b)
+    }
+
+    .AI.PART .AI-LVL {
+      background: rgba(255, 229, 53, .2);
+      color: var(--y)
+    }
+
+    .AI.NO .AI-LVL {
+      background: rgba(255, 45, 107, .12);
+      color: var(--r)
+    }
+
+    .AI-D {
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.5
+    }
+
+    [lang="ar"] .AI-D {
+      font-size: 11px;
+      text-align: right
+    }
+
+    .RR-NOTE {
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px
+    }
+
+    .RR-NOTE-ICO {
+      font-size: 13px;
+      flex-shrink: 0;
+      margin-top: 1px
+    }
+
+    /* ═══ S8 PAYMENT ═══ */
+    #S8 {
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(255, 149, 0, .04), transparent)
+    }
+
+    .PAY-LAYOUT {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start
+    }
+
+    .PAY-METHODS-GRID {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px
+    }
+
+    .PM-CARD {
+      padding: 28px;
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      transition: all .4s cubic-bezier(.16, 1, .3, 1)
+    }
+
+    .PM-CARD:hover {
+      transform: translateY(-6px)
+    }
+
+    .PM-CARD::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--PM-COLOR)
+    }
+
+    .PM-ICON {
+      font-size: 36px;
+      margin-bottom: 16px
+    }
+
+    .PM-TITLE {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: .5px;
+      margin-bottom: 10px
+    }
+
+    .PM-BODY {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.8
+    }
+
+    [lang="ar"] .PM-BODY {
+      line-height: 2
+    }
+
+    .PM-TAG {
+      display: inline-block;
+      margin-top: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 4px;
+      border: 1px solid;
+      letter-spacing: 1px;
+      text-transform: uppercase
+    }
+
+    [lang="ar"] .PM-TAG {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 10px
+    }
+
+    .PAY-FLOW-BOX {
+      padding: 32px
+    }
+
+    .PFB-TITLE {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 1px;
+      margin-bottom: 28px
+    }
+
+    .PF-STEPS {
+      display: flex;
+      flex-direction: column;
+      gap: 0
+    }
+
+    .PFS {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      position: relative
+    }
+
+    .PFS:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 18px;
+      top: 40px;
+      bottom: -8px;
+      width: 1px;
+      background: var(--border)
+    }
+
+    .PFS-NUM {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      flex-shrink: 0;
+      z-index: 1;
+      border: 1px solid
+    }
+
+    .PFS-CONTENT {
+      padding-bottom: 24px;
+      flex: 1
+    }
+
+    .PFS-T {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 5px
+    }
+
+    .PFS-B {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.7
+    }
+
+    [lang="ar"] .PFS-B {
+      line-height: 2
+    }
+
+    /* ═══ S9 SECURITY ═══ */
+    #S9 {
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0, 212, 255, .04), transparent)
+    }
+
+    .SEC-LAYOUT {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center
+    }
+
+    .SEC-FEATS {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 36px
+    }
+
+    .SF {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      transition: all .3s
+    }
+
+    .SF:hover {
+      border-color: rgba(0, 212, 255, .2);
+      background: rgba(0, 212, 255, .03);
+      transform: translateX(4px)
+    }
+
+    .SF-ICO {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+      background: rgba(0, 212, 255, .1);
+      border: 1px solid rgba(0, 212, 255, .2)
+    }
+
+    .SF-TEXT b {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 4px
+    }
+
+    .SF-TEXT span {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.7
+    }
+
+    [lang="ar"] .SF-TEXT span {
+      line-height: 2
+    }
+
+    .AUDIT-BOX {
+      background: var(--glass);
+      border: 1px solid var(--border-h);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, .5)
+    }
+
+    .AUD-H {
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    [lang="ar"] .AUD-H {
+      flex-direction: row-reverse
+    }
+
+    .AUD-TITLE {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 1px;
+      color: var(--white)
+    }
+
+    .AUD-LIVE {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--b);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px
+    }
+
+    [lang="ar"] .AUD-LIVE {
+      font-family: 'Cairo', sans-serif;
+      font-size: 10px
+    }
+
+    .AUD-LIVE::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--b);
+      box-shadow: 0 0 6px var(--b);
+      animation: blink 2s infinite
+    }
+
+    .AL {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .04)
+    }
+
+    [lang="ar"] .AL {
+      flex-direction: row-reverse
+    }
+
+    .AL:last-child {
+      border-bottom: none
+    }
+
+    .AL-D {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    .AL-C {
+      flex: 1
+    }
+
+    [lang="ar"] .AL-C {
+      text-align: right
+    }
+
+    .AL-A {
+      font-size: 12.5px;
+      font-weight: 600
+    }
+
+    .AL-M {
+      font-size: 10.5px;
+      color: var(--muted);
+      margin-top: 2px;
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    [lang="ar"] .AL-M {
+      font-family: 'Cairo', sans-serif;
+      font-size: 11px
+    }
+
+    .AL-T {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      white-space: nowrap
+    }
+
+    /* ═══ S10 CLOSING ═══ */
+    #S10 {
+      background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(255, 107, 53, .07), transparent);
+      text-align: center
+    }
+
+    .CL-BIGTEXT {
+      overflow: hidden;
+      margin: 0 auto 20px
+    }
+
+    .CL-LINE {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(52px, 8.5vw, 120px);
+      letter-spacing: 2px;
+      line-height: .95;
+      display: block
+    }
+
+    [lang="ar"] .CL-LINE {
+      font-family: 'Tajawal', sans-serif;
+      font-weight: 900;
+      font-size: clamp(42px, 7vw, 100px);
+      letter-spacing: 0;
+      line-height: 1.05
+    }
+
+    .CL-OUTLINE {
+      -webkit-text-stroke: 1px rgba(255, 255, 255, .15);
+      -webkit-text-fill-color: transparent;
+      color: transparent
+    }
+
+    .CL-BODY {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.9;
+      max-width: 560px;
+      margin: 24px auto 56px
+    }
+
+    [lang="ar"] .CL-BODY {
+      line-height: 2
+    }
+
+    .CL-BENES {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 540px;
+      margin: 0 auto 60px;
+      text-align: left
+    }
+
+    [lang="ar"] .CL-BENES {
+      text-align: right
+    }
+
+    .BENE {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 22px;
+      transition: all .3s
+    }
+
+    .BENE:hover {
+      border-color: rgba(255, 107, 53, .25);
+      transform: translateX(6px)
+    }
+
+    .BENE-CHECK {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: rgba(6, 255, 165, .12);
+      border: 1px solid rgba(6, 255, 165, .3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--b);
+      font-size: 13px;
+      flex-shrink: 0;
+      font-weight: 700
+    }
+
+    .BENE-T {
+      font-size: 14px;
+      font-weight: 500
+    }
+
+    .CL-BTNS {
+      display: flex;
+      gap: 16px;
+      justify-content: center
+    }
+
+    /* ═══ FOOTER ═══ */
+    .FOOTER {
+      padding: 64px 72px;
+      position: relative;
+      z-index: 2;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      background: rgba(0, 0, 0, .4)
+    }
+
+    .FT-TAGLINE {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px
+    }
+
+    [lang="ar"] .FT-TAGLINE {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 12px
+    }
+
+    .FT-BRAND {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 56px;
+      letter-spacing: 6px;
+      background: linear-gradient(135deg, var(--p), var(--p2), var(--y));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 8px
+    }
+
+    [lang="ar"] .FT-BRAND {
+      font-family: 'Tajawal', sans-serif;
+      font-weight: 900;
+      font-size: 52px;
+      letter-spacing: 2px
+    }
+
+    .FT-NUM {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 2px;
+      margin-bottom: 8px
+    }
+
+    .FT-SUB {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 6px
+    }
+
+    [lang="ar"] .FT-SUB {
+      font-family: 'Cairo', sans-serif;
+      letter-spacing: 0;
+      font-size: 12px
+    }
+
+    .FT-DECOR {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 32px
+    }
+
+    .FT-DOT {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--muted)
+    }
+
+    .FT-DECOR-LINE {
+      height: 1px;
+      width: 100px;
+      background: linear-gradient(90deg, transparent, var(--p), transparent)
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px) {
+      section {
+        padding: 80px 32px
+      }
+
+      .H-WRAP,
+      .CON-WRAP,
+      .PAY-LAYOUT,
+      .SEC-LAYOUT {
+        grid-template-columns: 1fr
+      }
+
+      .H-RIGHT,
+      .CON-VIS {
+        display: none
+      }
+
+      .PW-GRID {
+        grid-template-columns: 1fr
+      }
+
+      .FT-GRID {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .FC-A,
+      .FC-B,
+      .FC-C,
+      .FC-D,
+      .FC-E,
+      .FC-F,
+      .FC-G {
+        grid-column: span 6
+      }
+
+      .DB-LAYOUT {
+        grid-template-columns: 1fr
+      }
+
+      .DB-SIDEBAR {
+        display: none
+      }
+
+      .DB-TOPROW,
+      .ACCESS-G {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .DB-BOTROW {
+        grid-template-columns: 1fr
+      }
+
+      .RR-INNER {
+        grid-template-columns: 1fr
+      }
+
+      .RR-LEFT {
+        border-right: none;
+        border-bottom: 1px solid var(--border)
+      }
+
+      .SDOTS,
+      #LANG-TOGGLE,
+      .NAV .NAV-LINKS {
+        display: none
+      }
+
+      .NAV {
+        padding: 16px 24px
+      }
+
+      .DIV {
+        margin: 0 24px
+      }
+
+      .BA-MID {
+        display: none
+      }
+
+      .BA-ROW {
+        grid-template-columns: 1fr
+      }
+
+      .BA-BEFORE {
+        border-right: none;
+        border-bottom: 1px solid var(--border)
+      }
+
+      body {
+        cursor: auto
+      }
+
+      #CUR,
+      #CUR-RING {
+        display: none
+      }
+
+      .FOOTER {
+        padding: 48px 32px
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="CUR"><svg width="20" height="20" viewBox="0 0 20 20">
+      <circle cx="10" cy="10" r="4" fill="#ff6b35" />
+      <circle cx="10" cy="10" r="8" fill="none" stroke="rgba(255,107,53,0.3)" stroke-width="1" />
+    </svg></div>
+  <div id="CUR-RING"></div>
+  <div id="PROG"></div>
+  <div class="GRID"></div>
+  <div class="ORB O1"></div>
+  <div class="ORB O2"></div>
+  <div class="ORB O3"></div>
+
+  <!-- LANGUAGE TOGGLE -->
+  <div id="LANG-TOGGLE">
+    <button class="LT-BTN active" id="LT-EN" onclick="setLang('en')">EN</button>
+    <div class="LT-SEP"></div>
+    <button class="LT-BTN" id="LT-AR" onclick="setLang('ar')">ع</button>
+  </div>
+
+  <!-- NAV -->
+  <nav class="NAV">
+    <div class="NAV-LOGO">
+      <div class="NL-MARK"><svg width="36" height="36" viewBox="0 0 36 36">
+          <polygon points="18,2 34,10 34,26 18,34 2,26 2,10" fill="none" stroke="rgba(255,107,53,0.5)"
+            stroke-width="1" />
+          <polygon points="18,8 28,13 28,23 18,28 8,23 8,13" fill="rgba(255,107,53,0.15)" />
+          <circle cx="18" cy="18" r="4" fill="#ff6b35" />
+        </svg></div>
+      <div>
+        <div class="NL-NAME">NEXUS</div>
+        <div class="NL-TAG"><span class="EN">MARKETPLACE OS</span><span class="AR">منصة البيع الذكية</span></div>
+      </div>
+    </div>
+    <div class="NAV-LINKS">
+      <a href="#S2" class="NL"><span class="EN">Problem</span><span class="AR">المشكلة</span></a>
+      <a href="#S4" class="NL"><span class="EN">Features</span><span class="AR">المميزات</span></a>
+      <a href="#S5" class="NL"><span class="EN">Dashboard</span><span class="AR">الداشبورد</span></a>
+      <a href="#S7" class="NL"><span class="EN">Roles</span><span class="AR">الصلاحيات</span></a>
+      <a href="#S8" class="NL"><span class="EN">Payments</span><span class="AR">الدفع</span></a>
+      <button class="NAV-CTA"><span class="EN">Get Demo</span><span class="AR">جرب الآن</span></button>
+    </div>
+  </nav>
+
+  <nav class="SDOTS" id="SDOTS"></nav>
+
+  <!-- ══ S1 HERO ══ -->
+  <section id="S1" data-s="HERO">
+    <div class="C">
+      <div class="H-WRAP">
+        <div class="H-LEFT">
+          <div class="EYEBROW"><span class="EN">Multi-Vendor Platform</span><span class="AR">منصة متعددة الشركاء</span>
+          </div>
+          <div class="H-TITLE-LINE">
+            <div class="DISPLAY H-GRAD"><span class="EN">NEXUS</span><span class="AR">نيكسس</span></div>
+          </div>
+          <div class="H-TITLE-LINE">
+            <div class="DISPLAY D-OUTLINE"><span class="EN">MARKET</span><span class="AR">ماركت</span></div>
+          </div>
+          <div class="H-TITLE-LINE">
+            <div class="DISPLAY"><span class="EN">PLATFORM</span><span class="AR">بلاتفورم</span></div>
+          </div>
+          <p class="H-BODY"><span class="EN">One intelligent system for all your vendor partnerships — kids wear, school
+              uniforms, international supplies, and anything you add next. Unlimited scale, zero complexity.</span><span
+              class="AR">سيستم واحد ذكي لكل شراكاتك التجارية — ملابس أطفال، يونيفورم مدارس، سبلاي دولي، وأي حاجة هتضيفها
+              بعدين. توسع بلا حدود، من غير أي تعقيد.</span></p>
+          <div class="H-BTNS">
+            <button class="BTN-P"><span class="EN">Launch Demo</span><span class="AR">جرب السيستم</span></button>
+            <button class="BTN-G"><span class="EN">See Features</span><span class="AR">شوف المميزات</span></button>
+          </div>
+          <div class="H-STATS">
+            <div class="HS">
+              <div class="HSV" style="color:var(--p)">∞</div>
+              <div class="HSL"><span class="EN">Brands</span><span class="AR">شراكة</span></div>
+            </div>
+            <div class="HS">
+              <div class="HSV" style="color:var(--b)"><span class="EN">Smart</span><span class="AR">ذكي</span></div>
+              <div class="HSL"><span class="EN">Filters</span><span class="AR">فلترة</span></div>
+            </div>
+            <div class="HS">
+              <div class="HSV" style="color:var(--a2)">5</div>
+              <div class="HSL"><span class="EN">Roles</span><span class="AR">أدوار</span></div>
+            </div>
+            <div class="HS">
+              <div class="HSV" style="color:var(--y)">24/7</div>
+              <div class="HSL"><span class="EN">Live</span><span class="AR">مباشر</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="H-RIGHT">
+          <div class="PHONE-SHELL R" style="transition-delay:.4s">
+            <div class="P-NOTCH"></div>
+            <div class="P-SCREEN">
+              <div class="P-STATUS"><span>9:41</span><span>◆◆◆</span></div>
+              <div class="P-APP-HEADER">
+                <div class="P-APP-NAME">NEXUS</div>
+                <div class="P-APP-SUB"><span class="EN">Smart Marketplace · Live</span><span class="AR">منصة ذكية ·
+                    مباشر</span></div>
+              </div>
+              <div class="P-SEARCH"><span style="color:rgba(255,255,255,.2);font-size:11px">⌕</span><span><span
+                    class="EN">Cairo Int'l · Grade 5 · Size M</span><span class="AR">القاهرة الدولية · الصف ٥ · مقاس
+                    M</span></span></div>
+              <div class="P-CATS">
+                <div class="P-CAT ac"><span class="EN">👕 Uniforms</span><span class="AR">👕 يونيفورم</span></div>
+                <div class="P-CAT in"><span class="EN">👶 Kids</span><span class="AR">👶 أطفال</span></div>
+                <div class="P-CAT in"><span class="EN">📚 Supplies</span><span class="AR">📚 سبلاي</span></div>
+              </div>
+              <div class="P-ITEMS">
+                <div class="P-ITEM">
+                  <div class="P-ITEM-IMG" style="background:rgba(255,107,53,.15)">👕</div>
+                  <div class="P-ITEM-INFO">
+                    <div class="P-ITEM-NAME"><span class="EN">Summer Polo · White</span><span class="AR">بولو صيفي ·
+                        أبيض</span></div>
+                    <div class="P-ITEM-BRAND">CAIRO INT'L · GR.5</div>
+                  </div>
+                  <div style="text-align:right">
+                    <div class="P-ITEM-PRICE">280 ج</div>
+                    <div class="P-ITEM-STOCK" style="color:var(--b)">✓ <span class="EN">48 in stock</span><span
+                        class="AR">48 متاح</span></div>
+                  </div>
+                </div>
+                <div class="P-ITEM">
+                  <div class="P-ITEM-IMG" style="background:rgba(124,58,237,.15)">👖</div>
+                  <div class="P-ITEM-INFO">
+                    <div class="P-ITEM-NAME"><span class="EN">Navy Trousers · M</span><span class="AR">بنطلون كحلي ·
+                        M</span></div>
+                    <div class="P-ITEM-BRAND">CAIRO INT'L · GR.5</div>
+                  </div>
+                  <div style="text-align:right">
+                    <div class="P-ITEM-PRICE">340 ج</div>
+                    <div class="P-ITEM-STOCK" style="color:var(--y)">⚠ <span class="EN">7 left</span><span class="AR">٧
+                        متبقي</span></div>
+                  </div>
+                </div>
+                <div class="P-ITEM">
+                  <div class="P-ITEM-IMG" style="background:rgba(6,255,165,.1)">👗</div>
+                  <div class="P-ITEM-INFO">
+                    <div class="P-ITEM-NAME"><span class="EN">Girls Skirt · Plaid</span><span class="AR">جيبة بنات ·
+                        مربعات</span></div>
+                    <div class="P-ITEM-BRAND">CAIRO INT'L · GR.5</div>
+                  </div>
+                  <div style="text-align:right">
+                    <div class="P-ITEM-PRICE">310 ج</div>
+                    <div class="P-ITEM-STOCK" style="color:var(--b)">✓ <span class="EN">23 in stock</span><span
+                        class="AR">23 متاح</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="F-CHIP FC1 R" style="transition-delay:.7s">
+            <div
+              style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:1px;margin-bottom:4px">
+              <span class="EN">NEW ORDER</span><span class="AR" style="font-family:'Cairo',sans-serif">طلب جديد</span>
+            </div>
+            <div style="font-weight:700;font-size:13px"><span class="EN">Cairo Int'l — 3 items</span><span
+                class="AR">القاهرة الدولية — 3 قطع</span></div>
+            <div style="font-size:10px;color:var(--b);margin-top:2px">930 ج · <span class="EN">PAID ✓</span><span
+                class="AR">مدفوع ✓</span></div>
+          </div>
+          <div class="F-CHIP FC2 R" style="transition-delay:.9s">
+            <div style="font-size:9px;color:var(--muted);margin-bottom:4px"><span class="EN">⚠ STOCK ALERT</span><span
+                class="AR">⚠ تحذير مخزون</span></div>
+            <div style="font-weight:700;font-size:12px"><span class="EN">Navy Trousers Gr.5</span><span
+                class="AR">بنطلون كحلي الصف 5</span></div>
+            <div style="font-size:10px;color:var(--y);margin-top:2px"><span class="EN">7 pcs remaining</span><span
+                class="AR">7 قطع متبقية</span></div>
+          </div>
+          <div class="F-CHIP FC3 R" style="transition-delay:1.1s">
+            <div style="font-size:22px;margin-bottom:4px">📦</div>
+            <div style="font-size:12px;font-weight:700"><span class="EN">+Nile Int'l School</span><span
+                class="AR">+مدرسة النيل الدولية</span></div>
+            <div style="font-size:9px;color:var(--b)"><span class="EN">NEW PARTNER</span><span class="AR">شريك
+                جديد</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="DIV"></div>
+
+  <!-- ══ S2 PROBLEM ══ -->
+  <section id="S2" data-s="PROBLEM">
+    <div class="C">
+      <div style="text-align:center;margin-bottom:72px" class="R">
+        <div class="EYEBROW"><span class="EN">The Real Problem</span><span class="AR">المشكلة الحقيقية</span></div>
+        <div class="DISPLAY"><span class="EN">WITHOUT A SYSTEM<br><span style="color:var(--r)">CHAOS IS</span> <span
+              class="D-OUTLINE">DEFAULT</span></span><span class="AR">من غير سيستم<br><span
+              style="color:var(--r)">الفوضى</span> <span class="D-OUTLINE">طبيعية</span></span></div>
+      </div>
+      <div class="PW-GRID R" style="transition-delay:.15s">
+        <div class="PW-CELL" data-n="1"><span class="PW-ICON">🗂️</span>
+          <div class="PW-TITLE"><span class="EN">No Unified Catalog</span><span class="AR">مفيش كتالوج موحد</span></div>
+          <div class="PW-BODY"><span class="EN">Kids wear, school uniforms, and supplies live in different Excel files.
+              Finding a specific product for a customer takes 10–15 minutes of manual searching every single
+              time.</span><span class="AR">ملابس أطفال ويونيفورم وسبلاي كلهم في ملفات إكسيل منفصلة. لقاء منتج محدد
+              للعميل بياخد ١٠–١٥ دقيقة كل مرة.</span></div>
+          <div class="PW-PILL"><span class="EN">Direct Revenue Loss</span><span class="AR">خسارة مالية مباشرة</span>
+          </div>
+        </div>
+        <div class="PW-CELL" data-n="2"><span class="PW-ICON">🔍</span>
+          <div class="PW-TITLE"><span class="EN">Zero Smart Filtering</span><span class="AR">مفيش فلترة ذكية</span>
+          </div>
+          <div class="PW-BODY"><span class="EN">A customer asks: "Cairo Int'l School, Grade 5, Summer, Size M." There's
+              no fast way to answer. Manual row-by-row searching destroys the buying experience.</span><span
+              class="AR">العميل بيقول: "القاهرة الدولي، الصف ٥، صيفي، مقاس M." مفيش طريقة سريعة للإجابة. البحث اليدوي
+              بيدمر تجربة الشراء.</span></div>
+          <div class="PW-PILL"><span class="EN">Poor Buyer Experience</span><span class="AR">تجربة شراء ضعيفة</span>
+          </div>
+        </div>
+        <div class="PW-CELL" data-n="3"><span class="PW-ICON">📦</span>
+          <div class="PW-TITLE"><span class="EN">Invisible Inventory</span><span class="AR">مخزون غير مرئي</span></div>
+          <div class="PW-BODY"><span class="EN">You never know which sizes are running low until a customer catches it
+              first. Overselling creates refunds. Stockouts lose orders. Both are avoidable.</span><span class="AR">مش
+              عارف أنهي مقاسات بتخلص إلا لما العميل يعرف قبلك. الأوفرسيل بيعمل استرجاع، والنفاد بيضيع أوردرات. الاتنين
+              ممكن تتجنبهم.</span></div>
+          <div class="PW-PILL"><span class="EN">Lost Sales & Refunds</span><span class="AR">مبيعات ضايعة واسترجاع</span>
+          </div>
+        </div>
+        <div class="PW-CELL" data-n="4"><span class="PW-ICON">💸</span>
+          <div class="PW-TITLE"><span class="EN">Payment Chaos</span><span class="AR">فوضى في المدفوعات</span></div>
+          <div class="PW-BODY"><span class="EN">Cash, bank transfers, and installments all tracked on paper or notes.
+              Month-end reconciliation takes a full day, still has errors, and causes customer disputes.</span><span
+              class="AR">كاش وتحويلات وتقسيط كله بيتسجل على ورق أو نوتس. مقاربة آخر الشهر بتاخد يوم كامل وبرضو فيها
+              غلطات بتعمل مشاكل.</span></div>
+          <div class="PW-PILL"><span class="EN">Financial Inaccuracy</span><span class="AR">أخطاء مالية</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="DIV"></div>
+
+  <!-- ══ S3 CONCEPT ══ -->
+  <section id="S3" data-s="CONCEPT">
+    <div class="C">
+      <div class="CON-WRAP">
+        <div class="RL">
+          <div class="TAG"><span class="EN">The Architecture</span><span class="AR">المعمارية</span></div>
+          <div class="DISPLAY"><span class="EN">ONE CORE.<br><span class="H-GRAD">EVERY</span><br>PARTNER.</span><span
+              class="AR">نواة واحدة.<br><span class="H-GRAD">كل</span><br>الشركاء.</span></div>
+          <p class="BODY"><span class="EN">NEXUS is built around a single unified core. Every brand partner orbits it —
+              isolated in their own catalog, pricing, and rules, yet all connected and searchable from one place. Add a
+              new partner anytime — they plug straight in, nothing breaks.</span><span class="AR">نيكسس مبني حول نواة
+              موحدة واحدة. كل شريك تجاري بيدور حواليها — معزول في كتالوجه وأسعاره وقواعده، لكن كلهم متصلين وقابلين للبحث
+              من مكان واحد. ضيف شريك جديد في أي وقت — هيتوصل في الحال، من غير ما حاجة تتكسر.</span></p>
+          <div style="margin-top:36px;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;align-items:center;gap:14px;font-size:14px">
+              <div
+                style="width:36px;height:36px;border-radius:8px;background:rgba(255,107,53,.15);border:1px solid rgba(255,107,53,.3);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">
+                🏷️</div>
+              <div><b style="display:block;margin-bottom:2px"><span class="EN">Add partner in minutes</span><span
+                    class="AR">ضيف شريك في دقائق</span></b><span style="color:var(--muted);font-size:13px"><span
+                    class="EN">Configure catalog, prices, variants instantly</span><span class="AR">اعمل كتالوج وأسعار
+                    ومتغيرات في الحال</span></span></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;font-size:14px">
+              <div
+                style="width:36px;height:36px;border-radius:8px;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">
+                🎛️</div>
+              <div><b style="display:block;margin-bottom:2px"><span class="EN">Smart cross-brand search</span><span
+                    class="AR">بحث ذكي عبر كل الشركاء</span></b><span style="color:var(--muted);font-size:13px"><span
+                    class="EN">Filter across all partners simultaneously</span><span class="AR">فلتر عبر كل الشركاء في
+                    نفس الوقت</span></span></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;font-size:14px">
+              <div
+                style="width:36px;height:36px;border-radius:8px;background:rgba(6,255,165,.1);border:1px solid rgba(6,255,165,.2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">
+                📊</div>
+              <div><b style="display:block;margin-bottom:2px"><span class="EN">Unified analytics</span><span
+                    class="AR">تحليلات موحدة</span></b><span style="color:var(--muted);font-size:13px"><span
+                    class="EN">See which partner drives the most revenue</span><span class="AR">شوف أنهي شريك بيجيب أعلى
+                    إيراد</span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="CON-VIS RR" style="transition-delay:.2s">
+          <div class="ORB-RING OR1"></div>
+          <div class="ORB-RING OR2"></div>
+          <div class="ORB-RING OR3"></div>
+          <div class="ORB-CENTER"><span style="font-size:12px;letter-spacing:1px">NEXUS</span><span
+              style="font-family:'JetBrains Mono',monospace;font-size:7px;color:rgba(255,255,255,.4);letter-spacing:1px">CORE</span>
+          </div>
+          <div
+            style="position:absolute;top:50%;left:50%;transform:translate(calc(-50% + 0px), calc(-50% - 100px));z-index:3;text-align:center">
+            <div class="SAT-NODE"
+              style="background:rgba(255,107,53,.15);border-color:rgba(255,107,53,.3);margin:0 auto">👕</div>
+            <div class="SAT-LABEL"><span class="EN">KIDS WEAR</span><span class="AR">ملابس أطفال</span></div>
+          </div>
+          <div
+            style="position:absolute;top:50%;left:50%;transform:translate(calc(-50% + 100px), calc(-50%));z-index:3;text-align:center">
+            <div class="SAT-NODE"
+              style="background:rgba(124,58,237,.15);border-color:rgba(124,58,237,.3);margin:0 auto">🏫</div>
+            <div class="SAT-LABEL"><span class="EN">SCHOOL UNIF.</span><span class="AR">يونيفورم</span></div>
+          </div>
+          <div
+            style="position:absolute;top:50%;left:50%;transform:translate(calc(-50% + 0px), calc(-50% + 100px));z-index:3;text-align:center">
+            <div class="SAT-NODE" style="background:rgba(6,255,165,.1);border-color:rgba(6,255,165,.2);margin:0 auto">📚
+            </div>
+            <div class="SAT-LABEL"><span class="EN">INT'L SUPPLIES</span><span class="AR">سبلاي دولي</span></div>
+          </div>
+          <div
+            style="position:absolute;top:50%;left:50%;transform:translate(calc(-50% - 100px), calc(-50%));z-index:3;text-align:center">
+            <div class="SAT-NODE"
+              style="background:rgba(255,229,53,.1);border-color:rgba(255,229,53,.2);margin:0 auto;font-size:26px">+
+            </div>
+            <div class="SAT-LABEL"><span class="EN">NEXT PARTNER</span><span class="AR">شريك قادم</span></div>
+          </div>
+          <div
+            style="position:absolute;top:50%;left:50%;transform:translate(calc(-50% + 165px), calc(-50% - 110px));z-index:3;text-align:center">
+            <div class="SAT-NODE"
+              style="background:rgba(0,212,255,.1);border-color:rgba(0,212,255,.2);margin:0 auto;width:40px;height:40px;font-size:18px">
+              🎒</div>
+            <div class="SAT-LABEL"><span class="EN">BAGS</span><span class="AR">حقائب</span></div>
+          </div>
+          <div
+            style="position:absolute;top:50%;left:50%;transform:translate(calc(-50% - 165px), calc(-50% - 110px));z-index:3;text-align:center">
+            <div class="SAT-NODE"
+              style="background:rgba(255,45,107,.1);border-color:rgba(255,45,107,.2);margin:0 auto;width:40px;height:40px;font-size:18px">
+              👟</div>
+            <div class="SAT-LABEL"><span class="EN">SHOES</span><span class="AR">أحذية</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="DIV"></div>
+
+  <!-- ══ S4 FEATURES ══ -->
+  <section id="S4" data-s="FEATURES">
+    <div class="C">
+      <div style="margin-bottom:72px" class="R">
+        <div class="TAG"><span class="EN">Platform Modules</span><span class="AR">موديولات المنصة</span></div>
+        <div class="DISPLAY"><span class="EN">EVERYTHING<br>YOU NEED.</span><span class="AR">كل اللي<br>محتاجه.</span>
+        </div>
+        <p class="BODY" style="margin-top:14px"><span class="EN">Six purpose-built modules. Each one solves a real
+            problem. Together they run your entire marketplace.</span><span class="AR">ستة موديولات متخصصة. كل واحد بيحل
+            مشكلة حقيقية. مع بعض بيشغلوا ماركت بليسك كله.</span></p>
+      </div>
+      <div class="FT-GRID">
+        <div class="FC FC-A R" style="transition-delay:.05s">
+          <span class="FC-ICO">🏷️</span>
+          <div class="FC-TITLE"><span class="EN">Multi-Brand Catalog</span><span class="AR">كتالوج متعدد الشركاء</span>
+          </div>
+          <div class="FC-DESC"><span class="EN">Every partner brand lives in its own isolated catalog with custom
+              attributes, pricing rules, and product variants — yet all searchable from one place.</span><span
+              class="AR">كل شريك عنده كتالوجه المنفصل بخصائص وأسعار ومتغيرات مخصصة له — لكن كلهم قابلين للبحث من مكان
+              واحد.</span></div>
+          <div class="FC-LIST">
+            <div class="FC-LI"><span class="EN">Unlimited brand partners, added instantly</span><span class="AR">شركاء
+                غير محدودين، يتضافوا في الحال</span></div>
+            <div class="FC-LI"><span class="EN">Custom attributes: size, grade, color, gender, season</span><span
+                class="AR">خصائص مخصصة: مقاس، صف، لون، جنس، موسم</span></div>
+            <div class="FC-LI"><span class="EN">Separate pricing tiers per partner</span><span class="AR">أسعار منفصلة
+                لكل شريك</span></div>
+            <div class="FC-LI"><span class="EN">Seasonal catalogs (Summer / Winter)</span><span class="AR">كتالوجات
+                موسمية (صيف / شتاء)</span></div>
+            <div class="FC-LI"><span class="EN">Bulk product upload via spreadsheet</span><span class="AR">رفع منتجات
+                بالجملة عن طريق إكسيل</span></div>
+          </div>
+        </div>
+        <div class="FC FC-B R" style="transition-delay:.1s">
+          <span class="FC-ICO">🎛️</span>
+          <div class="FC-TITLE"><span class="EN">Smart Filter Engine</span><span class="AR">محرك الفلترة الذكية</span>
+          </div>
+          <div class="FC-DESC"><span class="EN">The most powerful feature. Customers find exactly what they need through
+              chained filters in under 5 seconds.</span><span class="AR">أقوى ميزة في المنصة. العميل بيلاقي اللي بيدور
+              عليه بالظبط بفلاتر متسلسلة في أقل من ٥ ثواني.</span></div>
+          <div class="FT-FILTER-DEMO">
+            <div class="FFD-LABEL"><span class="EN">Live Filter Chain</span><span class="AR">مثال فلترة مباشر</span>
+            </div>
+            <div class="FFD-ROW">
+              <div class="FFD-TAG aO"><span class="EN">👕 School Uniform</span><span class="AR">👕 يونيفورم</span></div>
+              <div class="FFD-TAG idle"><span class="EN">👶 Kids Wear</span><span class="AR">👶 أطفال</span></div>
+              <div class="FFD-TAG idle"><span class="EN">📚 Supplies</span><span class="AR">📚 سبلاي</span></div>
+            </div>
+            <div class="FFD-ROW">
+              <div class="FFD-TAG aV"><span class="EN">🏫 Cairo Int'l</span><span class="AR">🏫 القاهرة الدولي</span>
+              </div>
+              <div class="FFD-TAG idle"><span class="EN">Nile Int'l</span><span class="AR">النيل الدولي</span></div>
+            </div>
+            <div class="FFD-ROW">
+              <div class="FFD-TAG aO"><span class="EN">Summer 2025</span><span class="AR">صيف 2025</span></div>
+              <div class="FFD-TAG idle"><span class="EN">Winter</span><span class="AR">شتاء</span></div>
+            </div>
+            <div class="FFD-ROW">
+              <div class="FFD-TAG aV"><span class="EN">Grade 5</span><span class="AR">الصف الخامس</span></div>
+              <div class="FFD-TAG idle"><span class="EN">Grade 4</span><span class="AR">الصف الرابع</span></div>
+              <div class="FFD-TAG idle"><span class="EN">Grade 6</span><span class="AR">الصف السادس</span></div>
+            </div>
+            <div class="FFD-ROW">
+              <div class="FFD-TAG idle">S</div>
+              <div class="FFD-TAG aG">M</div>
+              <div class="FFD-TAG idle">L</div>
+              <div class="FFD-TAG idle">XL</div>
+            </div>
+            <div class="FFD-RESULT">▶ <span class="EN">3 PRODUCTS FOUND — POLO / TROUSERS / SKIRT · IN STOCK
+                ✓</span><span class="AR">3 منتجات موجودة — بولو / بنطلون / جيبة · متاح ✓</span></div>
+          </div>
+        </div>
+        <div class="FC FC-C R" style="transition-delay:.15s">
+          <span class="FC-ICO">📦</span>
+          <div class="FC-TITLE"><span class="EN">Inventory Control</span><span class="AR">التحكم في المخزون</span></div>
+          <div class="FC-DESC"><span class="EN">Live stock levels per brand, size, and grade. Auto-alerts before any
+              variant runs out.</span><span class="AR">كميات لحظية لكل شريك ومقاس وصف. تنبيهات أوتوماتيك قبل ما أي صنف
+              ينتهي.</span></div>
+          <div class="FC-LIST">
+            <div class="FC-LI"><span class="EN">Real-time quantities per variant</span><span class="AR">كميات لحظية لكل
+                متغير</span></div>
+            <div class="FC-LI"><span class="EN">Low-stock alerts before runout</span><span class="AR">تنبيه قبل نفاد
+                الصنف</span></div>
+            <div class="FC-LI"><span class="EN">Damage & loss tracking</span><span class="AR">تتبع الهالك
+                والخسارة</span></div>
+            <div class="FC-LI"><span class="EN">Reorder suggestions</span><span class="AR">اقتراحات إعادة الطلب</span>
+            </div>
+          </div>
+        </div>
+        <div class="FC FC-D R" style="transition-delay:.2s">
+          <span class="FC-ICO">🧾</span>
+          <div class="FC-TITLE"><span class="EN">Sales & Invoicing</span><span class="AR">المبيعات والفواتير</span>
+          </div>
+          <div class="FC-DESC"><span class="EN">Auto-branded PDF invoices. Every sale logged instantly with full payment
+              tracking.</span><span class="AR">فواتير PDF ببراندك أوتوماتيك. كل عملية بتتسجل في الحال مع تتبع كامل
+              للمدفوعات.</span></div>
+          <div class="PAY-MINI">
+            <div class="PM-ROW">
+              <div class="PM-LEFT">
+                <div class="PM-ICO">✅</div><span class="EN">Cairo Int'l — 4 items</span><span class="AR">القاهرة الدولي
+                  — 4 قطع</span>
+              </div>
+              <div class="PM-STATUS PS-PAID"><span class="EN">PAID</span><span class="AR">مدفوع</span></div>
+            </div>
+            <div class="PM-ROW">
+              <div class="PM-LEFT">
+                <div class="PM-ICO">⏳</div><span class="EN">Nile School — 2 items</span><span class="AR">مدرسة النيل — 2
+                  قطع</span>
+              </div>
+              <div class="PM-STATUS PS-PEND"><span class="EN">PENDING</span><span class="AR">معلق</span></div>
+            </div>
+            <div class="PM-ROW">
+              <div class="PM-LEFT">
+                <div class="PM-ICO">🔴</div><span class="EN">BIS Order #44</span><span class="AR">BIS أوردر #44</span>
+              </div>
+              <div class="PM-STATUS PS-LATE"><span class="EN">OVERDUE</span><span class="AR">متأخر</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="FC FC-E R" style="transition-delay:.25s">
+          <span class="FC-ICO">📊</span>
+          <div class="FC-TITLE"><span class="EN">Analytics</span><span class="AR">التحليلات</span></div>
+          <div class="FC-DESC"><span class="EN">Top brands, bestsellers, seasonal trends — all automatically ranked and
+              visualized.</span><span class="AR">أفضل الشركاء، أكتر المنتجات مبيعاً، الترندات الموسمية — كلها بتترتب
+              وتتحلل أوتوماتيك.</span></div>
+          <div class="ANL-MINI">
+            <div class="ANL-BARS">
+              <div class="ANL-B"
+                style="height:45%;background:linear-gradient(0,var(--p),rgba(255,107,53,.3));animation-delay:.1s"></div>
+              <div class="ANL-B"
+                style="height:60%;background:linear-gradient(0,var(--p),rgba(255,107,53,.3));animation-delay:.2s"></div>
+              <div class="ANL-B"
+                style="height:55%;background:linear-gradient(0,var(--a2),rgba(168,85,247,.3));animation-delay:.3s">
+              </div>
+              <div class="ANL-B"
+                style="height:80%;background:linear-gradient(0,var(--a2),rgba(168,85,247,.3));animation-delay:.4s">
+              </div>
+              <div class="ANL-B"
+                style="height:70%;background:linear-gradient(0,var(--y),rgba(255,229,53,.3));animation-delay:.5s"></div>
+              <div class="ANL-B"
+                style="height:100%;background:linear-gradient(0,var(--b),rgba(6,255,165,.3));animation-delay:.6s"></div>
+              <div class="ANL-B"
+                style="height:90%;background:linear-gradient(0,var(--b),rgba(6,255,165,.3));animation-delay:.7s"></div>
+            </div>
+            <div class="ANL-LBLS">
+              <div class="ANL-LBL">SEP</div>
+              <div class="ANL-LBL">OCT</div>
+              <div class="ANL-LBL">NOV</div>
+              <div class="ANL-LBL">DEC</div>
+              <div class="ANL-LBL">JAN</div>
+              <div class="ANL-LBL">FEB</div>
+              <div class="ANL-LBL">MAR</div>
+            </div>
+          </div>
+        </div>
+        <div class="FC FC-F R" style="transition-delay:.3s">
+          <span class="FC-ICO">👔</span>
+          <div class="FC-TITLE"><span class="EN">Staff & HR</span><span class="AR">الموظفين والـ HR</span></div>
+          <div class="FC-DESC"><span class="EN">From hiring to payslips — attendance, salaries, leaves, and advances all
+              automated. Zero end-of-month chaos.</span><span class="AR">من التعيين للسليب — حضور وغياب ومرتبات وإجازات
+              وسلف كله أوتوماتيك. صفر فوضى آخر الشهر.</span></div>
+          <div class="FC-LIST">
+            <div class="FC-LI"><span class="EN">Daily attendance & overtime</span><span class="AR">حضور يومي وأوفر
+                تايم</span></div>
+            <div class="FC-LI"><span class="EN">Salary calc with bonuses, deductions, advances</span><span
+                class="AR">مرتبات بخصومات وبونص وسلف</span></div>
+            <div class="FC-LI"><span class="EN">Auto PDF payslips per employee</span><span class="AR">سليب PDF لكل موظف
+                أوتوماتيك</span></div>
+            <div class="FC-LI"><span class="EN">Leave management and approval</span><span class="AR">إدارة إجازات
+                واعتمادها</span></div>
+          </div>
+        </div>
+        <div class="FC FC-G R" style="transition-delay:.35s">
+          <span class="FC-ICO">📱</span>
+          <div class="FC-TITLE"><span class="EN">Mobile — Always On</span><span class="AR">موبايل — دايماً متاح</span>
+          </div>
+          <div class="FC-DESC"><span class="EN">Full dashboard on any device. No install needed. Real-time push
+              notifications for every important event.</span><span class="AR">داشبورد كامل على أي جهاز. من غير تثبيت.
+              إشعارات فورية لكل حدث مهم.</span></div>
+          <div class="FC-LIST">
+            <div class="FC-LI"><span class="EN">Works on mobile, tablet, desktop</span><span class="AR">موبايل وتابلت
+                ولاب توب — كل الأجهزة</span></div>
+            <div class="FC-LI"><span class="EN">Real-time push notifications</span><span class="AR">إشعارات فورية
+                للأحداث المهمة</span></div>
+            <div class="FC-LI"><span class="EN">Available 24/7 — no downtime</span><span class="AR">متاح ٢٤/٧ بدون
+                انقطاع</span></div>
+            <div class="FC-LI"><span class="EN">Zero installation required</span><span class="AR">مفيش برنامج
+                يتحمله</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="DIV"></div>
+
+  <!-- ══ S5 DASHBOARD ══ -->
+  <section id="S5" data-s="DASHBOARD" style="padding-bottom:80px">
+    <div class="C">
+      <div style="text-align:center;margin-bottom:60px" class="R">
+        <div class="EYEBROW"><span class="EN">Live Dashboard</span><span class="AR">الداشبورد المباشر</span></div>
+        <div class="DISPLAY"><span class="EN">YOUR ENTIRE BUSINESS<br>ON <span class="H-GRAD">ONE</span>
+            SCREEN</span><span class="AR">كل بيزنسك<br>على <span class="H-GRAD">شاشة</span> واحدة</span></div>
+      </div>
+      <div class="DB-FRAME RS" style="transition-delay:.2s">
+        <div class="DB-TITLEBAR">
+          <div class="DB-DOTS">
+            <div class="DB-DOT" style="background:#ff5f57"></div>
+            <div class="DB-DOT" style="background:#febc2e"></div>
+            <div class="DB-DOT" style="background:#28c840"></div>
+          </div>
+          <div class="DB-APPNAME"><span class="EN">NEXUS — MARKETPLACE OS</span><span class="AR">نيكسس — منصة
+              البيع</span></div>
+          <div class="DB-LIVE"><span class="EN">LIVE · Thursday, March 5</span><span class="AR">مباشر · الخميس ٥
+              مارس</span></div>
+        </div>
+        <div class="DB-LAYOUT">
+          <div class="DB-SIDEBAR">
+            <div class="DB-LOGO-SMALL"><span class="EN">NEXUS ◆</span><span class="AR">نيكسس ◆</span></div>
+            <div class="DB-NAV-ITEM ACT"><span class="DB-NAV-ICO">◈</span><span class="EN">Dashboard</span><span
+                class="AR">الداشبورد</span></div>
+            <div class="DB-NAV-ITEM"><span class="DB-NAV-ICO">🧾</span><span class="EN">Orders</span><span
+                class="AR">الطلبات</span>
+              <div class="DB-NAV-BADGE">12</div>
+            </div>
+            <div class="DB-NAV-ITEM"><span class="DB-NAV-ICO">🏷️</span><span class="EN">Catalog</span><span
+                class="AR">الكتالوج</span></div>
+            <div class="DB-NAV-ITEM"><span class="DB-NAV-ICO">📦</span><span class="EN">Inventory</span><span
+                class="AR">المخزون</span></div>
+            <div class="DB-NAV-ITEM"><span class="DB-NAV-ICO">👥</span><span class="EN">Customers</span><span
+                class="AR">العملاء</span></div>
+            <div class="DB-NAV-ITEM"><span class="DB-NAV-ICO">💳</span><span class="EN">Payments</span><span
+                class="AR">المدفوعات</span>
+              <div class="DB-NAV-BADGE" style="background:var(--r)">3</div>
+            </div>
+            <div class="DB-NAV-ITEM"><span class="DB-NAV-ICO">👔</span><span class="EN">Staff & HR</span><span
+                class="AR">الموظفين</span></div>
+            <div class="DB-NAV-ITEM"><span class="DB-NAV-ICO">📈</span><span class="EN">Reports</span><span
+                class="AR">التقارير</span></div>
+            <div class="DB-NAV-SECTION"><span class="EN">BRANDS</span><span class="AR">الشركاء</span></div>
+            <div class="DB-NAV-ITEM"><span class="DB-NAV-ICO">👕</span><span class="EN">Kids Wear</span><span
+                class="AR">ملابس أطفال</span></div>
+            <div class="DB-NAV-ITEM"><span class="DB-NAV-ICO">🏫</span><span class="EN">Cairo Int'l</span><span
+                class="AR">القاهرة الدولي</span></div>
+            <div class="DB-NAV-ITEM" style="color:var(--p);font-size:11px"><span class="DB-NAV-ICO">+</span><span
+                class="EN">Add Partner</span><span class="AR">ضيف شريك</span></div>
+          </div>
+          <div class="DB-MAIN">
+            <div class="DB-TOPROW">
+              <div class="DB-KPI KPI-A">
+                <div class="DB-KPI-V" style="color:var(--p)">84,200 ج</div>
+                <div class="DB-KPI-L"><span class="EN">TODAY'S REVENUE</span><span class="AR">إيراد اليوم</span></div>
+                <div class="DB-KPI-T T-UP">↑ +18%</div>
+              </div>
+              <div class="DB-KPI KPI-B">
+                <div class="DB-KPI-V" style="color:var(--b)">34</div>
+                <div class="DB-KPI-L"><span class="EN">NEW ORDERS</span><span class="AR">طلبات جديدة</span></div>
+                <div class="DB-KPI-T T-UP">↑ +7</div>
+              </div>
+              <div class="DB-KPI KPI-C">
+                <div class="DB-KPI-V" style="color:var(--a2)">91%</div>
+                <div class="DB-KPI-L"><span class="EN">STOCK AVAILABLE</span><span class="AR">مخزون متاح</span></div>
+                <div class="DB-KPI-T T-UP">↑ +3%</div>
+              </div>
+              <div class="DB-KPI KPI-D">
+                <div class="DB-KPI-V" style="color:var(--y)">6</div>
+                <div class="DB-KPI-L"><span class="EN">PENDING PAYMENTS</span><span class="AR">دفعات معلقة</span></div>
+                <div class="DB-KPI-T T-DN">↓ -2</div>
+              </div>
+            </div>
+            <div class="DB-BOTROW">
+              <div class="DB-CHART-BOX">
+                <div class="DB-CT"><span style="color:var(--white);font-weight:700"><span class="EN">Monthly
+                      Revenue</span><span class="AR">الإيراد الشهري</span></span><span>+24%</span></div>
+                <div class="DB-BARS">
+                  <div class="DB-BAR"
+                    style="height:40%;background:linear-gradient(0,var(--p),rgba(255,107,53,.4));animation-delay:.1s">
+                  </div>
+                  <div class="DB-BAR"
+                    style="height:56%;background:linear-gradient(0,var(--p),rgba(255,107,53,.4));animation-delay:.2s">
+                  </div>
+                  <div class="DB-BAR"
+                    style="height:48%;background:linear-gradient(0,var(--a2),rgba(168,85,247,.4));animation-delay:.3s">
+                  </div>
+                  <div class="DB-BAR"
+                    style="height:72%;background:linear-gradient(0,var(--a2),rgba(168,85,247,.4));animation-delay:.4s">
+                  </div>
+                  <div class="DB-BAR"
+                    style="height:64%;background:linear-gradient(0,var(--y),rgba(255,229,53,.4));animation-delay:.5s">
+                  </div>
+                  <div class="DB-BAR"
+                    style="height:88%;background:linear-gradient(0,var(--b),rgba(6,255,165,.4));animation-delay:.6s">
+                  </div>
+                  <div class="DB-BAR"
+                    style="height:100%;background:linear-gradient(0,var(--p),var(--a2));animation-delay:.7s;box-shadow:0 0 20px rgba(255,107,53,.4)">
+                  </div>
+                </div>
+                <div class="DB-XLABELS">
+                  <div class="DB-XLABEL">SEP</div>
+                  <div class="DB-XLABEL">OCT</div>
+                  <div class="DB-XLABEL">NOV</div>
+                  <div class="DB-XLABEL">DEC</div>
+                  <div class="DB-XLABEL">JAN</div>
+                  <div class="DB-XLABEL">FEB</div>
+                  <div class="DB-XLABEL">MAR</div>
+                </div>
+              </div>
+              <div class="DB-LIST-BOX">
+                <div class="DB-CT" style="margin-bottom:12px"><span style="color:var(--white);font-weight:700"><span
+                      class="EN">Top Partners Today</span><span class="AR">أفضل الشركاء اليوم</span></span></div>
+                <div class="DB-LI">
+                  <div class="DB-LI-D" style="background:var(--p);box-shadow:0 0 6px var(--p)"></div>
+                  <div class="DB-LI-N"><span class="EN">Cairo Int'l School</span><span class="AR">القاهرة الدولية</span>
+                  </div>
+                  <div class="DB-LI-V" style="color:var(--p)">31K</div>
+                  <div class="DB-LI-P">37%</div>
+                </div>
+                <div class="DB-LI">
+                  <div class="DB-LI-D" style="background:var(--a2)"></div>
+                  <div class="DB-LI-N"><span class="EN">Kids Wear</span><span class="AR">ملابس أطفال</span></div>
+                  <div class="DB-LI-V" style="color:var(--a2)">22K</div>
+                  <div class="DB-LI-P">26%</div>
+                </div>
+                <div class="DB-LI">
+                  <div class="DB-LI-D" style="background:var(--b)"></div>
+                  <div class="DB-LI-N"><span class="EN">Nile Int'l</span><span class="AR">النيل الدولي</span></div>
+                  <div class="DB-LI-V" style="color:var(--b)">18K</div>
+                  <div class="DB-LI-P">21%</div>
+                </div>
+                <div class="DB-LI">
+                  <div class="DB-LI-D" style="background:var(--y)"></div>
+                  <div class="DB-LI-N"><span class="EN">School Supplies</span><span class="AR">سبلاي المدارس</span>
+                  </div>
+                  <div class="DB-LI-V" style="color:var(--y)">13K</div>
+                  <div class="DB-LI-P">16%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="DIV"></div>
+
+  <!-- ══ S6 BEFORE/AFTER ══ -->
+  <section id="S6" data-s="BEFORE/AFTER">
+    <div class="C">
+      <div style="text-align:center;margin-bottom:72px" class="R">
+        <div class="EYEBROW"><span class="EN">Transformation</span><span class="AR">التحول</span></div>
+        <div class="DISPLAY"><span class="EN">BEFORE <span class="D-OUTLINE">VS</span><br><span
+              class="H-GRAD">AFTER</span> NEXUS</span><span class="AR">قبل <span class="D-OUTLINE">وبعد</span><br><span
+              class="H-GRAD">نيكسس</span></span></div>
+      </div>
+      <div class="BA-TABLE">
+        <div class="BA-ROW R" style="transition-delay:.1s">
+          <div class="BA-FLOAT"><span class="EN">CATALOG</span><span class="AR">الكتالوج</span></div>
+          <div class="BA-BEFORE">
+            <div class="BA-STAMP B"><span class="EN">◆ BEFORE</span><span class="AR">◆ قبل</span></div>
+            <div class="BA-TITLE"><span class="EN">One Excel per brand, different formats</span><span class="AR">إكسيل
+                منفصل لكل شريك</span></div>
+            <div class="BA-BODY"><span class="EN">5 partners = 5 files. Finding one product takes 10 minutes. Adding a
+                new partner means building a new file from scratch.</span><span class="AR">5 شركاء = 5 ملفات. لقاء منتج
+                واحد بياخد 10 دقايق. ضافة شريك جديد يعني تبني ملف من الصفر.</span></div>
+          </div>
+          <div class="BA-MID">→</div>
+          <div class="BA-AFTER">
+            <div class="BA-STAMP A"><span class="EN">◆ AFTER</span><span class="AR">◆ بعد</span></div>
+            <div class="BA-TITLE"><span class="EN">One catalog. All brands. Instant search.</span><span
+                class="AR">كتالوج واحد. كل الشركاء. بحث فوري.</span></div>
+            <div class="BA-BODY"><span class="EN">Add any partner in minutes. Every product across all brands is
+                searchable from a single search bar. New partner = plug in and go.</span><span class="AR">ضيف أي شريك في
+                دقائق. كل منتج عبر كل الشركاء قابل للبحث من مكان واحد. شريك جديد = وصّله وابدأ فوراً.</span></div>
+          </div>
+        </div>
+        <div class="BA-ROW R" style="transition-delay:.15s">
+          <div class="BA-FLOAT"><span class="EN">FILTERING</span><span class="AR">الفلترة</span></div>
+          <div class="BA-BEFORE">
+            <div class="BA-STAMP B"><span class="EN">◆ BEFORE</span><span class="AR">◆ قبل</span></div>
+            <div class="BA-TITLE"><span class="EN">Manual row-by-row search, 10+ minutes</span><span class="AR">بحث يدوي
+                سطر سطر، أكتر من ١٠ دقايق</span></div>
+            <div class="BA-BODY"><span class="EN">Customer asks for Cairo Int'l, Grade 5, Summer, Size M — you scroll
+                hundreds of rows hoping to find it.</span><span class="AR">العميل بيطلب القاهرة الدولي، الصف 5، صيفي،
+                مقاس M — بتسكرول مئات الصفوف وتتمنى تلاقيه.</span></div>
+          </div>
+          <div class="BA-MID">→</div>
+          <div class="BA-AFTER">
+            <div class="BA-STAMP A"><span class="EN">◆ AFTER</span><span class="AR">◆ بعد</span></div>
+            <div class="BA-TITLE"><span class="EN">5-click filter finds exact match in 3s</span><span class="AR">5
+                كليكات تلاقي المنتج بالظبط في 3 ثواني</span></div>
+            <div class="BA-BODY"><span class="EN">Chained filters: School → Grade → Season → Size. System shows exact
+                matches instantly with stock availability.</span><span class="AR">فلاتر متسلسلة: مدرسة → صف → موسم →
+                مقاس. السيستم بيجيب المنتجات بالظبط في الحال مع حالة المخزون.</span></div>
+          </div>
+        </div>
+        <div class="BA-ROW R" style="transition-delay:.2s">
+          <div class="BA-FLOAT"><span class="EN">INVENTORY</span><span class="AR">المخزون</span></div>
+          <div class="BA-BEFORE">
+            <div class="BA-STAMP B"><span class="EN">◆ BEFORE</span><span class="AR">◆ قبل</span></div>
+            <div class="BA-TITLE"><span class="EN">Stockouts discovered by customers first</span><span class="AR">العميل
+                بيعرف بنفاد الصنف قبلك</span></div>
+            <div class="BA-BODY"><span class="EN">You find out a size ran out when a customer orders it and you can't
+                fulfill. Overselling, refunds, and disputes become weekly.</span><span class="AR">بتعرف إن المقاس خلص
+                لما عميل يطلبه ومتقدرش توفره. أوفرسيل واسترجاع ومشاكل كل أسبوع.</span></div>
+          </div>
+          <div class="BA-MID">→</div>
+          <div class="BA-AFTER">
+            <div class="BA-STAMP A"><span class="EN">◆ AFTER</span><span class="AR">◆ بعد</span></div>
+            <div class="BA-TITLE"><span class="EN">Live stock + auto-alerts before runout</span><span class="AR">مخزون
+                لحظي + تنبيه قبل النفاد</span></div>
+            <div class="BA-BODY"><span class="EN">System tracks every variant in real time. Auto-alert fires when stock
+                hits minimum — before it runs out. Zero surprise stockouts.</span><span class="AR">السيستم بيتتبع كل
+                متغير في الوقت الحقيقي. تنبيه أوتوماتيك لما المخزون يوصل للحد الأدنى. صفر مفاجآت.</span></div>
+          </div>
+        </div>
+        <div class="BA-ROW R" style="transition-delay:.25s">
+          <div class="BA-FLOAT"><span class="EN">PAYMENTS</span><span class="AR">المدفوعات</span></div>
+          <div class="BA-BEFORE">
+            <div class="BA-STAMP B"><span class="EN">◆ BEFORE</span><span class="AR">◆ قبل</span></div>
+            <div class="BA-TITLE"><span class="EN">Handwritten receipts, untracked cash</span><span class="AR">إيصالات
+                يدوية وكاش غير متتبع</span></div>
+            <div class="BA-BODY"><span class="EN">Cash in the drawer, transfers noted on phone, installments forgotten.
+                Month-end reconciliation takes all day and still has errors.</span><span class="AR">كاش في الدرج،
+                تحويلات على النوتس، تقسيط بينسى. مقاربة آخر الشهر بتاخد يوم كامل وبرضو فيها غلطات.</span></div>
+          </div>
+          <div class="BA-MID">→</div>
+          <div class="BA-AFTER">
+            <div class="BA-STAMP A"><span class="EN">◆ AFTER</span><span class="AR">◆ بعد</span></div>
+            <div class="BA-TITLE"><span class="EN">Auto-invoiced + every payment tracked</span><span class="AR">فاتورة
+                أوتوماتيك + كل دفعة متتبعة</span></div>
+            <div class="BA-BODY"><span class="EN">Every payment logged instantly. PDF invoice auto-sent. Outstanding
+                balances visible in real time. Month-end closes in 10 minutes.</span><span class="AR">كل دفعة بتتسجل في
+                الحال. PDF أوتوماتيك. الأرصدة المعلقة واضحة. آخر الشهر بينتهي في ١٠ دقايق.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="DIV"></div>
+
+  <!-- ══ S7 ROLES ══ -->
+  <section id="S7" data-s="ROLES">
+    <div class="C">
+      <div style="text-align:center;margin-bottom:72px" class="R">
+        <div class="EYEBROW"><span class="EN">Access Control</span><span class="AR">التحكم في الوصول</span></div>
+        <div class="DISPLAY"><span class="EN">EVERYONE SEES<br><span class="H-GRAD">EXACTLY</span> WHAT THEY
+            NEED</span><span class="AR">كل واحد بيشوف<br><span class="H-GRAD">بالظبط</span> اللي يخصه</span></div>
+        <p class="BODY" style="margin:16px auto 0;text-align:center"><span class="EN">Complete role-based access. Every
+            team member logs in with their own account and sees only what you assign.</span><span class="AR">تحكم كامل
+            في الصلاحيات. كل عضو في الفريق بيدخل بحسابه الخاص وبيشوف بس اللي انت حددتهوله.</span></p>
+      </div>
+      <div class="ROLE-GRID">
+        <!-- OWNER -->
+        <div class="ROLE-ROW R" style="transition-delay:.1s;--RC:rgba(255,107,53,.1)">
+          <div class="RR-INNER">
+            <div class="RR-LEFT">
+              <div class="RR-EMO">👑</div>
+              <div class="RR-NAME"><span class="EN">Owner / CEO</span><span class="AR">المالك / المدير</span></div>
+              <div class="RR-TITLE"><span class="EN">FULL ACCESS</span><span class="AR">وصول كامل</span></div>
+              <div class="RR-BADGE"
+                style="color:var(--p);border-color:rgba(255,107,53,.3);background:rgba(255,107,53,.1)"><span
+                  class="EN">ALL MODULES</span><span class="AR">كل الموديولات</span></div>
+            </div>
+            <div class="RR-RIGHT">
+              <div class="RR-LABEL"><span class="EN">Permissions Map</span><span class="AR">خريطة الصلاحيات</span></div>
+              <div class="ACCESS-G">
+                <div class="AI OK">
+                  <div class="AI-ICO">◈</div>
+                  <div class="AI-N"><span class="EN">Dashboard</span><span class="AR">الداشبورد</span></div>
+                  <div class="AI-LVL"><span class="EN">FULL</span><span class="AR">كامل</span></div>
+                  <div class="AI-D"><span class="EN">All KPIs</span><span class="AR">كل الأرقام</span></div>
+                </div>
+                <div class="AI OK">
+                  <div class="AI-ICO">🧾</div>
+                  <div class="AI-N"><span class="EN">Sales</span><span class="AR">المبيعات</span></div>
+                  <div class="AI-LVL"><span class="EN">FULL</span><span class="AR">كامل</span></div>
+                  <div class="AI-D"><span class="EN">View, edit, delete</span><span class="AR">عرض وتعديل وحذف</span>
+                  </div>
+                </div>
+                <div class="AI OK">
+                  <div class="AI-ICO">🏷️</div>
+                  <div class="AI-N"><span class="EN">Catalog</span><span class="AR">الكتالوج</span></div>
+                  <div class="AI-LVL"><span class="EN">FULL</span><span class="AR">كامل</span></div>
+                  <div class="AI-D"><span class="EN">All brands</span><span class="AR">كل الشركاء</span></div>
+                </div>
+                <div class="AI OK">
+                  <div class="AI-ICO">📦</div>
+                  <div class="AI-N"><span class="EN">Inventory</span><span class="AR">المخزون</span></div>
+                  <div class="AI-LVL"><span class="EN">FULL</span><span class="AR">كامل</span></div>
+                  <div class="AI-D"><span class="EN">With cost prices</span><span class="AR">بأسعار التكلفة</span></div>
+                </div>
+                <div class="AI OK">
+                  <div class="AI-ICO">👔</div>
+                  <div class="AI-N"><span class="EN">HR</span><span class="AR">الموظفين</span></div>
+                  <div class="AI-LVL"><span class="EN">FULL</span><span class="AR">كامل</span></div>
+                  <div class="AI-D"><span class="EN">Salaries + reviews</span><span class="AR">مرتبات وتقييم</span>
+                  </div>
+                </div>
+                <div class="AI OK">
+                  <div class="AI-ICO">📈</div>
+                  <div class="AI-N"><span class="EN">Reports</span><span class="AR">التقارير</span></div>
+                  <div class="AI-LVL"><span class="EN">FULL</span><span class="AR">كامل</span></div>
+                  <div class="AI-D"><span class="EN">All exports</span><span class="AR">كل التصدير</span></div>
+                </div>
+              </div>
+              <div class="RR-NOTE">
+                <div class="RR-NOTE-ICO">◆</div><span class="EN">Owner is the only role that can add new brand partners,
+                  create user accounts, and change system settings.</span><span class="AR">المالك هو الوحيد اللي يقدر
+                  يضيف شركاء جدد، يعمل حسابات موظفين، ويغير إعدادات السيستم.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- SALES REP -->
+        <div class="ROLE-ROW R" style="transition-delay:.15s;--RC:rgba(6,255,165,.07)">
+          <div class="RR-INNER">
+            <div class="RR-LEFT">
+              <div class="RR-EMO">🤝</div>
+              <div class="RR-NAME"><span class="EN">Sales Rep</span><span class="AR">مندوب المبيعات</span></div>
+              <div class="RR-TITLE"><span class="EN">SALES ONLY</span><span class="AR">مبيعات فقط</span></div>
+              <div class="RR-BADGE"
+                style="color:var(--b);border-color:rgba(6,255,165,.3);background:rgba(6,255,165,.08)"><span
+                  class="EN">SCOPED</span><span class="AR">محدود</span></div>
+            </div>
+            <div class="RR-RIGHT">
+              <div class="RR-LABEL"><span class="EN">Permissions Map</span><span class="AR">خريطة الصلاحيات</span></div>
+              <div class="ACCESS-G">
+                <div class="AI PART">
+                  <div class="AI-ICO">◈</div>
+                  <div class="AI-N"><span class="EN">Dashboard</span><span class="AR">الداشبورد</span></div>
+                  <div class="AI-LVL"><span class="EN">OWN ONLY</span><span class="AR">بتاعه بس</span></div>
+                  <div class="AI-D"><span class="EN">His sales only</span><span class="AR">مبيعاته هو بس</span></div>
+                </div>
+                <div class="AI OK">
+                  <div class="AI-ICO">🧾</div>
+                  <div class="AI-N"><span class="EN">Invoice</span><span class="AR">الفاتورة</span></div>
+                  <div class="AI-LVL"><span class="EN">CREATE</span><span class="AR">إنشاء</span></div>
+                  <div class="AI-D"><span class="EN">New invoices only</span><span class="AR">فواتير جديدة بس</span>
+                  </div>
+                </div>
+                <div class="AI OK">
+                  <div class="AI-ICO">🏷️</div>
+                  <div class="AI-N"><span class="EN">Catalog</span><span class="AR">الكتالوج</span></div>
+                  <div class="AI-LVL"><span class="EN">READ</span><span class="AR">قراءة</span></div>
+                  <div class="AI-D"><span class="EN">Browse + filters</span><span class="AR">تصفح وفلترة</span></div>
+                </div>
+                <div class="AI PART">
+                  <div class="AI-ICO">📦</div>
+                  <div class="AI-N"><span class="EN">Inventory</span><span class="AR">المخزون</span></div>
+                  <div class="AI-LVL"><span class="EN">QTY ONLY</span><span class="AR">كمية فقط</span></div>
+                  <div class="AI-D"><span class="EN">No cost prices</span><span class="AR">بدون أسعار تكلفة</span></div>
+                </div>
+                <div class="AI NO">
+                  <div class="AI-ICO">👔</div>
+                  <div class="AI-N"><span class="EN">HR</span><span class="AR">الموظفين</span></div>
+                  <div class="AI-LVL"><span class="EN">BLOCKED</span><span class="AR">محظور</span></div>
+                  <div class="AI-D"><span class="EN">No employee data</span><span class="AR">مفيش بيانات</span></div>
+                </div>
+                <div class="AI NO">
+                  <div class="AI-ICO">📈</div>
+                  <div class="AI-N"><span class="EN">Reports</span><span class="AR">التقارير</span></div>
+                  <div class="AI-LVL"><span class="EN">BLOCKED</span><span class="AR">محظور</span></div>
+                  <div class="AI-D"><span class="EN">No company revenue</span><span class="AR">مش شايف الإيرادات</span>
+                  </div>
+                </div>
+              </div>
+              <div class="RR-NOTE">
+                <div class="RR-NOTE-ICO">◆</div><span class="EN">Sales reps see only their own performance. They can't
+                  view what colleagues sold or access the company's total revenue.</span><span class="AR">مندوب المبيعات
+                  بيشوف أداءه هو بس. مش قادر يشوف مبيعات زملاءه أو إيرادات الشركة الكاملة.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- WAREHOUSE -->
+        <div class="ROLE-ROW R" style="transition-delay:.2s;--RC:rgba(168,85,247,.07)">
+          <div class="RR-INNER">
+            <div class="RR-LEFT">
+              <div class="RR-EMO">🏭</div>
+              <div class="RR-NAME"><span class="EN">Warehouse Mgr</span><span class="AR">مشرف المخزن</span></div>
+              <div class="RR-TITLE"><span class="EN">STOCK ONLY</span><span class="AR">مخزون فقط</span></div>
+              <div class="RR-BADGE"
+                style="color:var(--a2);border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.1)"><span
+                  class="EN">INVENTORY</span><span class="AR">مخزون</span></div>
+            </div>
+            <div class="RR-RIGHT">
+              <div class="RR-LABEL"><span class="EN">Permissions Map</span><span class="AR">خريطة الصلاحيات</span></div>
+              <div class="ACCESS-G">
+                <div class="AI PART">
+                  <div class="AI-ICO">◈</div>
+                  <div class="AI-N"><span class="EN">Dashboard</span><span class="AR">الداشبورد</span></div>
+                  <div class="AI-LVL"><span class="EN">STOCK</span><span class="AR">مخزون فقط</span></div>
+                  <div class="AI-D"><span class="EN">Inventory only</span><span class="AR">ملخص المخزون</span></div>
+                </div>
+                <div class="AI NO">
+                  <div class="AI-ICO">🧾</div>
+                  <div class="AI-N"><span class="EN">Sales</span><span class="AR">المبيعات</span></div>
+                  <div class="AI-LVL"><span class="EN">BLOCKED</span><span class="AR">محظور</span></div>
+                  <div class="AI-D"><span class="EN">No financial data</span><span class="AR">مفيش بيانات مالية</span>
+                  </div>
+                </div>
+                <div class="AI NO">
+                  <div class="AI-ICO">👥</div>
+                  <div class="AI-N"><span class="EN">Customers</span><span class="AR">العملاء</span></div>
+                  <div class="AI-LVL"><span class="EN">BLOCKED</span><span class="AR">محظور</span></div>
+                  <div class="AI-D"><span class="EN">No customer data</span><span class="AR">مفيش بيانات عملاء</span>
+                  </div>
+                </div>
+                <div class="AI OK">
+                  <div class="AI-ICO">📦</div>
+                  <div class="AI-N"><span class="EN">Inventory</span><span class="AR">المخزون</span></div>
+                  <div class="AI-LVL"><span class="EN">FULL</span><span class="AR">كامل</span></div>
+                  <div class="AI-D"><span class="EN">Add, edit, track</span><span class="AR">ضيف وعدل وتابع</span></div>
+                </div>
+                <div class="AI OK">
+                  <div class="AI-ICO">🔔</div>
+                  <div class="AI-N"><span class="EN">Alerts</span><span class="AR">التنبيهات</span></div>
+                  <div class="AI-LVL"><span class="EN">FULL</span><span class="AR">كامل</span></div>
+                  <div class="AI-D"><span class="EN">Manage low stock</span><span class="AR">إدارة تنبيهات النفاد</span>
+                  </div>
+                </div>
+                <div class="AI NO">
+                  <div class="AI-ICO">👔</div>
+                  <div class="AI-N"><span class="EN">HR</span><span class="AR">الموظفين</span></div>
+                  <div class="AI-LVL"><span class="EN">BLOCKED</span><span class="AR">محظور</span></div>
+                  <div class="AI-D"><span class="EN">No employee data</span><span class="AR">مفيش بيانات</span></div>
+                </div>
+              </div>
+              <div class="RR-NOTE">
+                <div class="RR-NOTE-ICO">◆</div><span class="EN">Warehouse manager tracks all stock movements. No access
+                  to prices, customer data, or salary information.</span><span class="AR">مشرف المخزن بيتابع كل حركات
+                  الأصناف. مفيش وصول للأسعار أو بيانات العملاء أو المرتبات.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ACCOUNTANT -->
+        <div class="ROLE-ROW R" style="transition-delay:.25s;--RC:rgba(255,149,0,.07)">
+          <div class="RR-INNER">
+            <div class="RR-LEFT">
+              <div class="RR-EMO">🧮</div>
+              <div class="RR-NAME"><span class="EN">Accountant</span><span class="AR">المحاسب</span></div>
+              <div class="RR-TITLE"><span class="EN">FINANCE ONLY</span><span class="AR">مالي فقط</span></div>
+              <div class="RR-BADGE"
+                style="color:var(--p2);border-color:rgba(255,149,0,.3);background:rgba(255,149,0,.1)"><span
+                  class="EN">FINANCIAL</span><span class="AR">مالي</span></div>
+            </div>
+            <div class="RR-RIGHT">
+              <div class="RR-LABEL"><span class="EN">Permissions Map</span><span class="AR">خريطة الصلاحيات</span></div>
+              <div class="ACCESS-G">
+                <div class="AI PART">
+                  <div class="AI-ICO">◈</div>
+                  <div class="AI-N"><span class="EN">Dashboard</span><span class="AR">الداشبورد</span></div>
+                  <div class="AI-LVL"><span class="EN">FINANCE</span><span class="AR">مالي بس</span></div>
+                  <div class="AI-D"><span class="EN">Revenue only</span><span class="AR">الإيرادات فقط</span></div>
+                </div>
+                <div class="AI OK">
+                  <div class="AI-ICO">🧾</div>
+                  <div class="AI-N"><span class="EN">Invoices</span><span class="AR">الفواتير</span></div>
+                  <div class="AI-LVL"><span class="EN">FULL</span><span class="AR">كامل</span></div>
+                  <div class="AI-D"><span class="EN">View, print, export</span><span class="AR">عرض وطباعة وتصدير</span>
+                  </div>
+                </div>
+                <div class="AI OK">
+                  <div class="AI-ICO">💳</div>
+                  <div class="AI-N"><span class="EN">Payments</span><span class="AR">المدفوعات</span></div>
+                  <div class="AI-LVL"><span class="EN">FULL</span><span class="AR">كامل</span></div>
+                  <div class="AI-D"><span class="EN">Track all payments</span><span class="AR">تتبع كل المدفوعات</span>
+                  </div>
+                </div>
+                <div class="AI OK">
+                  <div class="AI-ICO">💵</div>
+                  <div class="AI-N"><span class="EN">Payroll</span><span class="AR">المرتبات</span></div>
+                  <div class="AI-LVL"><span class="EN">FULL</span><span class="AR">كامل</span></div>
+                  <div class="AI-D"><span class="EN">Calculate & process</span><span class="AR">حساب وصرف</span></div>
+                </div>
+                <div class="AI PART">
+                  <div class="AI-ICO">📦</div>
+                  <div class="AI-N"><span class="EN">Inventory</span><span class="AR">المخزون</span></div>
+                  <div class="AI-LVL"><span class="EN">READ</span><span class="AR">قراءة</span></div>
+                  <div class="AI-D"><span class="EN">View only</span><span class="AR">مشاهدة فقط</span></div>
+                </div>
+                <div class="AI NO">
+                  <div class="AI-ICO">⚙️</div>
+                  <div class="AI-N"><span class="EN">Settings</span><span class="AR">الإعدادات</span></div>
+                  <div class="AI-LVL"><span class="EN">BLOCKED</span><span class="AR">محظور</span></div>
+                  <div class="AI-D"><span class="EN">No system changes</span><span class="AR">مش يغير إعدادات</span>
+                  </div>
+                </div>
+              </div>
+              <div class="RR-NOTE">
+                <div class="RR-NOTE-ICO">◆</div><span class="EN">Accountant sees all financial numbers but cannot view
+                  performance reviews or modify system configuration.</span><span class="AR">المحاسب بيشوف كل الأرقام
+                  المالية لكن مش قادر يشوف تقييمات الموظفين أو يغير إعدادات السيستم.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="R"
+        style="margin-top:32px;display:flex;gap:28px;justify-content:center;flex-wrap:wrap;transition-delay:.3s">
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)">
+          <div style="width:12px;height:12px;border-radius:3px;background:rgba(6,255,165,.2);border:1px solid var(--b)">
+          </div><span class="EN">Full Access</span><span class="AR">وصول كامل</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)">
+          <div
+            style="width:12px;height:12px;border-radius:3px;background:rgba(255,229,53,.2);border:1px solid var(--y)">
+          </div><span class="EN">Partial / Read Only</span><span class="AR">جزئي / قراءة فقط</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)">
+          <div
+            style="width:12px;height:12px;border-radius:3px;background:rgba(255,45,107,.15);border:1px solid var(--r)">
+          </div><span class="EN">Blocked</span><span class="AR">محظور</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="DIV"></div>
+
+  <!-- ══ S8 PAYMENT ══ -->
+  <section id="S8" data-s="PAYMENTS">
+    <div class="C">
+      <div style="text-align:center;margin-bottom:72px" class="R">
+        <div class="EYEBROW"><span class="EN">Payment System</span><span class="AR">نظام الدفع</span></div>
+        <div class="DISPLAY"><span class="EN">EVERY METHOD.<br><span class="H-GRAD">FULLY</span> TRACKED.</span><span
+            class="AR">كل طريقة دفع.<br><span class="H-GRAD">كل</span> دفعة متتبعة.</span></div>
+      </div>
+      <div class="PAY-LAYOUT">
+        <div class="PAY-METHODS-GRID R" style="transition-delay:.1s">
+          <div class="PM-CARD CARD"
+            style="--PM-COLOR:linear-gradient(90deg,var(--b),transparent);background:rgba(6,255,165,.04);border:1px solid rgba(6,255,165,.12)">
+            <div class="PM-ICON">💵</div>
+            <div class="PM-TITLE"><span class="EN">Cash</span><span class="AR">كاش</span></div>
+            <div class="PM-BODY"><span class="EN">Logged instantly at point of sale. Auto-receipt generated. End-of-day
+                summary always accurate.</span><span class="AR">بيتسجل في الحال في وقت البيع. إيصال أوتوماتيك. ملخص آخر
+                اليوم دايماً دقيق.</span></div>
+            <div class="PM-TAG" style="color:var(--b);border-color:rgba(6,255,165,.3);background:rgba(6,255,165,.08)">
+              <span class="EN">INSTANT RECEIPT</span><span class="AR">إيصال فوري</span></div>
+          </div>
+          <div class="PM-CARD CARD"
+            style="--PM-COLOR:linear-gradient(90deg,var(--a2),transparent);background:rgba(168,85,247,.04);border:1px solid rgba(168,85,247,.12)">
+            <div class="PM-ICON">🏦</div>
+            <div class="PM-TITLE"><span class="EN">Bank Transfer</span><span class="AR">تحويل بنكي</span></div>
+            <div class="PM-BODY"><span class="EN">Auto-match transfer to invoice. Upload confirmation. System marks paid
+                instantly.</span><span class="AR">ربط أوتوماتيك بالفاتورة. ارفع التأكيد. السيستم يسجله مدفوع في
+                الحال.</span></div>
+            <div class="PM-TAG"
+              style="color:var(--a2);border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.08)"><span
+                class="EN">AUTO-MATCH</span><span class="AR">ربط أوتوماتيك</span></div>
+          </div>
+          <div class="PM-CARD CARD"
+            style="--PM-COLOR:linear-gradient(90deg,var(--p2),transparent);background:rgba(255,149,0,.04);border:1px solid rgba(255,149,0,.12)">
+            <div class="PM-ICON">📅</div>
+            <div class="PM-TITLE"><span class="EN">Installments</span><span class="AR">تقسيط</span></div>
+            <div class="PM-BODY"><span class="EN">Custom payment schedules. System tracks every installment and sends
+                late reminders automatically.</span><span class="AR">جداول دفع مخصصة. السيستم بيتابع كل قسط وبيبعت تذكير
+                للتأخر أوتوماتيك.</span></div>
+            <div class="PM-TAG" style="color:var(--p2);border-color:rgba(255,149,0,.3);background:rgba(255,149,0,.08)">
+              <span class="EN">AUTO-REMINDERS</span><span class="AR">تذكير أوتوماتيك</span></div>
+          </div>
+          <div class="PM-CARD CARD"
+            style="--PM-COLOR:linear-gradient(90deg,var(--r),transparent);background:rgba(255,45,107,.04);border:1px solid rgba(255,45,107,.12)">
+            <div class="PM-ICON">📋</div>
+            <div class="PM-TITLE"><span class="EN">Credit / Deferred</span><span class="AR">آجل / دين</span></div>
+            <div class="PM-BODY"><span class="EN">Sell on credit to trusted clients. Outstanding balances tracked with
+                aging reports and overdue alerts.</span><span class="AR">بيع بالأجل لعملاء موثوقين. الأرصدة المعلقة
+                بتتتبع مع تقارير تقادم وتنبيهات تأخر.</span></div>
+            <div class="PM-TAG" style="color:var(--r);border-color:rgba(255,45,107,.3);background:rgba(255,45,107,.08)">
+              <span class="EN">AGING REPORTS</span><span class="AR">تقارير التقادم</span></div>
+          </div>
+        </div>
+        <div class="CARD RR" style="transition-delay:.2s">
+          <div class="PAY-FLOW-BOX">
+            <div class="PFB-TITLE"><span class="EN">ORDER → PAYMENT FLOW</span><span class="AR">من الطلب للدفع</span>
+            </div>
+            <div class="PF-STEPS">
+              <div class="PFS">
+                <div class="PFS-NUM"
+                  style="background:rgba(255,107,53,.12);border-color:rgba(255,107,53,.3);color:var(--p)">1</div>
+                <div class="PFS-CONTENT">
+                  <div class="PFS-T"><span class="EN">Customer selects via filters</span><span class="AR">العميل بيختار
+                      بالفلاتر</span></div>
+                  <div class="PFS-B"><span class="EN">School → Grade → Season → Size. Exact match in
+                      seconds.</span><span class="AR">مدرسة → صف → موسم → مقاس. مطابقة دقيقة في ثواني.</span></div>
+                </div>
+              </div>
+              <div class="PFS">
+                <div class="PFS-NUM"
+                  style="background:rgba(168,85,247,.12);border-color:rgba(168,85,247,.3);color:var(--a2)">2</div>
+                <div class="PFS-CONTENT">
+                  <div class="PFS-T"><span class="EN">Invoice auto-generated</span><span class="AR">الفاتورة بتتولد
+                      أوتوماتيك</span></div>
+                  <div class="PFS-B"><span class="EN">Branded PDF with itemized list, taxes, and totals — ready
+                      instantly.</span><span class="AR">PDF ببراندك مع قائمة مفصلة وضرائب وإجمالي — جاهزة في
+                      الحال.</span></div>
+                </div>
+              </div>
+              <div class="PFS">
+                <div class="PFS-NUM"
+                  style="background:rgba(255,149,0,.12);border-color:rgba(255,149,0,.3);color:var(--p2)">3</div>
+                <div class="PFS-CONTENT">
+                  <div class="PFS-T"><span class="EN">Payment method selected</span><span class="AR">اختيار طريقة
+                      الدفع</span></div>
+                  <div class="PFS-B"><span class="EN">Cash, transfer, installment, or credit — system logs
+                      instantly.</span><span class="AR">كاش أو تحويل أو تقسيط أو آجل — السيستم بيسجل في الحال.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="PFS">
+                <div class="PFS-NUM"
+                  style="background:rgba(6,255,165,.1);border-color:rgba(6,255,165,.25);color:var(--b)">4</div>
+                <div class="PFS-CONTENT">
+                  <div class="PFS-T"><span class="EN">Everything updates automatically</span><span class="AR">كل حاجة
+                      بتتحدث أوتوماتيك</span></div>
+                  <div class="PFS-B"><span class="EN">Stock decrements. Payment logged. Balance updated. Invoice sent.
+                      Done.</span><span class="AR">المخزون بينقص. الدفعة بتتسجل. الرصيد بيتحدث. الفاتورة بتتبعت.
+                      خلص.</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="DIV"></div>
+
+  <!-- ══ S9 SECURITY ══ -->
+  <section id="S9" data-s="SECURITY">
+    <div class="C">
+      <div class="SEC-LAYOUT">
+        <div class="RL">
+          <div class="TAG"><span class="EN">Security</span><span class="AR">الأمان</span></div>
+          <div class="DISPLAY"><span class="EN">YOUR DATA.<br><span
+                class="H-GRAD">ALWAYS</span><br>PROTECTED.</span><span class="AR">بياناتك.<br><span
+                class="H-GRAD">محمية</span><br>دايماً.</span></div>
+          <p class="BODY"><span class="EN">Every action in the system is logged with a full audit trail — who did what,
+              from where, and when. Nothing disappears, nothing goes untracked.</span><span class="AR">كل عملية في
+              السيستم بتتسجل مع سجل مراجعة كامل — مين عمل إيه، من فين، وامتى. مفيش حاجة بتتضيع أو تفضل من غير
+              توثيق.</span></p>
+          <div class="SEC-FEATS">
+            <div class="SF R" style="transition-delay:.2s">
+              <div class="SF-ICO">🔐</div>
+              <div class="SF-TEXT"><b><span class="EN">Full Encryption</span><span class="AR">تشفير
+                    كامل</span></b><span><span class="EN">All data encrypted at rest and in transit. Zero unauthorized
+                    access.</span><span class="AR">كل البيانات مشفرة في التخزين وأثناء النقل. صفر وصول غير مصرح
+                    به.</span></span></div>
+            </div>
+            <div class="SF R" style="transition-delay:.3s">
+              <div class="SF-ICO">📋</div>
+              <div class="SF-TEXT"><b><span class="EN">Complete Audit Log</span><span class="AR">سجل مراجعة
+                    كامل</span></b><span><span class="EN">Every action logged: user, action, timestamp — fully
+                    searchable.</span><span class="AR">كل عملية بتتسجل: المستخدم والعملية والوقت — كله قابل
+                    للبحث.</span></span></div>
+            </div>
+            <div class="SF R" style="transition-delay:.4s">
+              <div class="SF-ICO">🛡️</div>
+              <div class="SF-TEXT"><b><span class="EN">Daily Auto-Backup</span><span class="AR">نسخ احتياطي
+                    يومي</span></b><span><span class="EN">Your data is backed up automatically every 24 hours. Nothing
+                    is ever lost.</span><span class="AR">بياناتك بتتنسخ احتياطياً أوتوماتيك كل ٢٤ ساعة. مفيش حاجة
+                    بتضيع.</span></span></div>
+            </div>
+            <div class="SF R" style="transition-delay:.5s">
+              <div class="SF-ICO">🚪</div>
+              <div class="SF-TEXT"><b><span class="EN">Individual Accounts</span><span class="AR">حسابات
+                    فردية</span></b><span><span class="EN">No shared logins. Every employee has their own secured
+                    account.</span><span class="AR">مفيش حسابات مشتركة. كل موظف له حسابه المؤمن بكلمة سره.</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="RR" style="transition-delay:.2s">
+          <div class="AUDIT-BOX">
+            <div class="AUD-H">
+              <div class="AUD-TITLE"><span class="EN">◈ ACTIVITY LOG</span><span class="AR">◈ سجل النشاط</span></div>
+              <div class="AUD-LIVE"><span class="EN">LIVE</span><span class="AR">مباشر</span></div>
+            </div>
+            <div class="AL">
+              <div class="AL-D" style="background:var(--b);box-shadow:0 0 6px var(--b)"></div>
+              <div class="AL-C">
+                <div class="AL-A"><span class="EN">Ahmed — Invoice #2245 created</span><span class="AR">أحمد — الفاتورة
+                    #2245 أُنشئت</span></div>
+                <div class="AL-M"><span class="EN">CAIRO INT'L · EGP 8,400 · PAID</span><span class="AR">القاهرة الدولي
+                    · ٨٤٠٠ ج · مدفوع</span></div>
+              </div>
+              <div class="AL-T">10:23</div>
+            </div>
+            <div class="AL">
+              <div class="AL-D" style="background:var(--a2)"></div>
+              <div class="AL-C">
+                <div class="AL-A"><span class="EN">Mohamed — Stock update: Kids Polo</span><span class="AR">محمد — تحديث
+                    مخزون: بولو أطفال</span></div>
+                <div class="AL-M"><span class="EN">+120 PCS SIZE M ADDED</span><span class="AR">تمت إضافة ١٢٠ قطعة مقاس
+                    M</span></div>
+              </div>
+              <div class="AL-T">09:45</div>
+            </div>
+            <div class="AL">
+              <div class="AL-D" style="background:var(--p)"></div>
+              <div class="AL-C">
+                <div class="AL-A"><span class="EN">Sara — New partner: Nile Int'l</span><span class="AR">سارة — شريك
+                    جديد: النيل الدولي</span></div>
+                <div class="AL-M"><span class="EN">45 PRODUCTS ADDED</span><span class="AR">تمت إضافة ٤٥ منتج</span>
+                </div>
+              </div>
+              <div class="AL-T">09:12</div>
+            </div>
+            <div class="AL">
+              <div class="AL-D" style="background:var(--y)"></div>
+              <div class="AL-C">
+                <div class="AL-A"><span class="EN">⚠ ALERT — Girls Skirt Size 10 low</span><span class="AR">⚠ تنبيه —
+                    جيبة بنات مقاس 10 قليل</span></div>
+                <div class="AL-M"><span class="EN">ONLY 3 PCS — REORDER NOW</span><span class="AR">3 قطع فقط متبقية —
+                    اطلب الآن</span></div>
+              </div>
+              <div class="AL-T">08:30</div>
+            </div>
+            <div class="AL">
+              <div class="AL-D" style="background:var(--b);box-shadow:0 0 6px var(--b)"></div>
+              <div class="AL-C">
+                <div class="AL-A"><span class="EN">Owner — March payroll approved</span><span class="AR">المدير — مرتبات
+                    مارس اعتُمدت</span></div>
+                <div class="AL-M"><span class="EN">8 STAFF · EGP 64,000 TOTAL</span><span class="AR">٨ موظفين · ٦٤٠٠٠
+                    جنيه إجمالي</span></div>
+              </div>
+              <div class="AL-T">08:00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="DIV"></div>
+
+  <!-- ══ S10 CLOSING ══ -->
+  <section id="S10" data-s="CLOSING">
+    <div class="C">
+      <div class="EYEBROW R" style="justify-content:center;transition-delay:.05s"><span class="EN">The Bottom
+          Line</span><span class="AR">الخلاصة</span></div>
+      <div class="CL-BIGTEXT R" style="transition-delay:.1s">
+        <span class="CL-LINE H-GRAD"><span class="EN">A BUSINESS ON A</span><span class="AR">بيزنس بيشتغل</span></span>
+        <span class="CL-LINE"><span class="EN">REAL SYSTEM</span><span class="AR">بسيستم حقيقي</span></span>
+        <span class="CL-LINE CL-OUTLINE"><span class="EN">WINS.</span><span class="AR">بيكسب.</span></span>
+      </div>
+      <p class="CL-BODY R" style="transition-delay:.2s"><span class="EN">Not just saved time and fewer mistakes. It's a
+          marketplace that handles any number of brand partners, scales infinitely, looks professional to every
+          customer, and stays in your complete control from anywhere.</span><span class="AR">مش بس توفير وقت وتقليل
+          غلطات. ده ماركت بليس بيتعامل مع أي عدد من الشركاء، بيتوسع للانهاية، بيظهر احترافي قدام كل عميل، وبيفضل في إيدك
+          من أي مكان.</span></p>
+      <div class="CL-BENES R" style="transition-delay:.3s">
+        <div class="BENE">
+          <div class="BENE-CHECK">◆</div>
+          <div class="BENE-T"><span class="EN">Add unlimited brand partners — any category, anytime, zero
+              rebuilding</span><span class="AR">شركاء غير محدودين — أي فئة، أي وقت، من غير ما تبني من الصفر</span></div>
+        </div>
+        <div class="BENE">
+          <div class="BENE-CHECK">◆</div>
+          <div class="BENE-T"><span class="EN">Smart 5-step filters: any product found in under 3 seconds,
+              always</span><span class="AR">فلاتر ذكية ٥ خطوات: أي منتج في أقل من ٣ ثواني، دايماً</span></div>
+        </div>
+        <div class="BENE">
+          <div class="BENE-CHECK">◆</div>
+          <div class="BENE-T"><span class="EN">Auto-invoicing — branded PDFs sent instantly, zero manual
+              work</span><span class="AR">فوترة أوتوماتيك — PDF ببراندك فوراً، صفر شغل يدوي</span></div>
+        </div>
+        <div class="BENE">
+          <div class="BENE-CHECK">◆</div>
+          <div class="BENE-T"><span class="EN">Every payment tracked: cash, transfer, installment, and
+              credit</span><span class="AR">كل دفعة متتبعة: كاش وتحويل وتقسيط وآجل</span></div>
+        </div>
+        <div class="BENE">
+          <div class="BENE-CHECK">◆</div>
+          <div class="BENE-T"><span class="EN">Live dashboard — top brands, products, and categories ranked
+              always</span><span class="AR">داشبورد مباشر — أفضل الشركاء والمنتجات والفئات مرتبة دايماً</span></div>
+        </div>
+        <div class="BENE">
+          <div class="BENE-CHECK">◆</div>
+          <div class="BENE-T"><span class="EN">5 roles, bulletproof permissions — every team member sees only what they
+              need</span><span class="AR">5 أدوار وصلاحيات محكمة — كل عضو بيشوف بس اللي يخصه</span></div>
+        </div>
+        <div class="BENE">
+          <div class="BENE-CHECK">◆</div>
+          <div class="BENE-T"><span class="EN">Your marketplace in your hand, from anywhere, 24/7</span><span
+              class="AR">ماركت بليسك في إيدك من أي مكان ٢٤/٧</span></div>
+        </div>
+      </div>
+      <div class="CL-BTNS R" style="transition-delay:.4s">
+        <button class="BTN-P"><span class="EN">Launch Your Platform 🚀</span><span class="AR">ابدأ منصتك
+            🚀</span></button>
+        <button class="BTN-G"><span class="EN">Book a Demo</span><span class="AR">احجز عرضاً</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="FOOTER">
+    <div class="FT-TAGLINE R"><span class="EN">This Demo Was Built By</span><span class="AR">تم إنشاء هذا العرض
+        بواسطة</span></div>
+    <div class="FT-BRAND R" style="transition-delay:.1s">APEX SOFTWARE</div>
+    <div class="FT-NUM R" style="transition-delay:.2s">📞 010 2267 3000</div>
+    <div class="FT-SUB R" style="transition-delay:.25s"><span class="EN">Custom Software Solutions · Egypt · Built to
+        Scale</span><span class="AR">حلول برمجية مخصصة · مصر · مصمم للتوسع</span></div>
+    <div class="FT-DECOR R" style="transition-delay:.3s">
+      <div class="FT-DECOR-LINE"></div>
+      <div class="FT-DOT"></div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;color:var(--muted)">NEXUS © 2025
+      </div>
+      <div class="FT-DOT"></div>
+      <div class="FT-DECOR-LINE"></div>
+    </div>
+  </footer>
+
+  <script>
+    // ── LANG TOGGLE
+    function setLang(lang) {
+      const root = document.getElementById('ROOT');
+      root.setAttribute('lang', lang);
+      root.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+      document.getElementById('LT-EN').classList.toggle('active', lang === 'en');
+      document.getElementById('LT-AR').classList.toggle('active', lang === 'ar');
+      localStorage.setItem('nexus_lang', lang);
+    }
+    // restore
+    const saved = localStorage.getItem('nexus_lang');
+    if (saved) setLang(saved);
+
+    // ── CURSOR
+    const CUR = document.getElementById('CUR'), RING = document.getElementById('CUR-RING');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; CUR.style.left = mx + 'px'; CUR.style.top = my + 'px' });
+    (function loop() { rx += (mx - rx) * .1; ry += (my - ry) * .1; RING.style.left = rx + 'px'; RING.style.top = ry + 'px'; requestAnimationFrame(loop) })();
+    document.querySelectorAll('button,a,.ROLE-ROW,.FC,.PW-CELL,.BA-ROW,.PM-CARD,.SAT-NODE').forEach(el => {
+      el.addEventListener('mouseenter', () => { CUR.style.transform = 'translate(-50%,-50%) scale(2)'; RING.style.transform = 'translate(-50%,-50%) scale(1.8)'; RING.style.borderColor = 'rgba(255,107,53,.7)' });
+      el.addEventListener('mouseleave', () => { CUR.style.transform = 'translate(-50%,-50%) scale(1)'; RING.style.transform = 'translate(-50%,-50%) scale(1)'; RING.style.borderColor = 'rgba(255,107,53,.4)' });
+    });
+
+    // ── PROGRESS
+    window.addEventListener('scroll', () => {
+      document.getElementById('PROG').style.width = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100) + '%';
+    });
+
+    // ── SIDE DOTS
+    const secs = document.querySelectorAll('section[data-s]');
+    const dc = document.getElementById('SDOTS');
+    secs.forEach((s, i) => {
+      const b = document.createElement('button');
+      b.className = 'SD'; b.setAttribute('data-s', s.dataset.s);
+      b.addEventListener('click', () => s.scrollIntoView({ behavior: 'smooth' }));
+      dc.appendChild(b);
+    });
+    const dots = dc.querySelectorAll('.SD');
+    secs.forEach((s, i) => {
+      new IntersectionObserver(en => { en.forEach(e => { if (e.isIntersecting) dots.forEach((d, j) => d.classList.toggle('on', i === j)) }) }, { threshold: .4 }).observe(s);
+    });
+
+    // ── NAV ACTIVE
+    const NLS = document.querySelectorAll('.NL');
+    secs.forEach(s => {
+      new IntersectionObserver(en => { en.forEach(e => { if (e.isIntersecting) { const id = e.target.id; NLS.forEach(l => l.classList.toggle('on', l.getAttribute('href') === '#' + id)) } }) }, { threshold: .4 }).observe(s);
+    });
+
+    // ── REVEAL
+    document.querySelectorAll('.R,.RL,.RR,.RS').forEach(el => {
+      new IntersectionObserver(en => { en.forEach(e => { if (e.isIntersecting) e.target.classList.add('V') }) }, { threshold: .07 }).observe(el);
+    });
+  </script>
+</body>
+
+</html>
